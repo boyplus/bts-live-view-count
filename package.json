@@ -1,0 +1,22 @@
+{
+  "name": "bts-live-view-count",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boyplus/bts-live-view-count.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/boyplus/bts-live-view-count/issues"
+  },
+  "homepage": "https://github.com/boyplus/bts-live-view-count#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
