@@ -5,7 +5,7 @@ const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
 
 const keys = require('./config/keys');
-console.log(keys.mongoURI);
+mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
 
 const app = express();
 
