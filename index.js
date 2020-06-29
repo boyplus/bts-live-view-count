@@ -1,4 +1,12 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const passport = require('passport');
+const cookieSession = require('cookie-session');
+const bodyParser = require('body-parser');
+
+const keys = require('./config/keys');
+console.log(keys.mongoURI);
+
 const app = express();
 
 if (process.env.NODE_ENV === 'production') {
