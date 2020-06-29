@@ -1,5 +1,5 @@
 import axios from 'axios';
-console.log(process.env);
+
 export default axios.create({
     baseURL: 'https://www.googleapis.com/youtube/v3/',
     params: {
