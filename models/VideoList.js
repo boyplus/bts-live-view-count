@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const VideoList = new Schema({
-    name: String,
-    videos: Array,
+    youtubeId: String,
 });
 
-mongoose.model('videos', VideoList);
+mongoose.model('videoList', VideoList);
