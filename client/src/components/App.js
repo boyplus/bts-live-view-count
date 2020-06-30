@@ -5,10 +5,9 @@ import Landing from './Landing';
 import Admin from './Admin/Admin';
 
 class App extends Component {
-    
     render() {
         return (
-            <div>
+            <div className="ui container">
                 <BrowserRouter>
                     <div>
                         <Route exact path="/" component={Landing}></Route>
