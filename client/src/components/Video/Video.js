@@ -24,7 +24,7 @@ class Video extends Component {
 
     componentDidUpdate(previousProps, previousState) {
         // console.log('inside update');
-        if (previousProps.video.oldView !== this.props.video.oldView) {
+        if (previousProps.video.newView !== this.props.video.newView) {
             console.log('props is not the same, can update state');
             this.setState({
                 oldView: parseInt(this.props.video.oldView, 10),
