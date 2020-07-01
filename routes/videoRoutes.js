@@ -9,7 +9,11 @@ module.exports = (app) => {
     app.get('/api/videos', async (req, res) => {
         try {
             const videos = await VideoDetail.find({});
-            res.send(videos[0]);
+            const response = {
+                videos: videos[0].videos,
+                lastUpdated: videos[0].lastUpdated,
+            };
+            res.send(response);
         } catch (err) {
             res.status(500).send(err);
         }
