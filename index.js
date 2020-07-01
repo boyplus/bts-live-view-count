@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
+const chalk = require('chalk');
 
 const keys = require('./config/keys');
 require('./models/User');
@@ -29,7 +30,7 @@ require('./routes/adminRoutes')(app);
 require('./routes/videoRoutes')(app);
 
 require('./utils/updateDB')();
-console.log('eiei');
+console.log(chalk.green.inverse('Start node server'));
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'));

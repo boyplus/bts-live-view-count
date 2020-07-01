@@ -1,27 +1,20 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import axios from 'axios';
-import youtube from '../axios/youtube';
 
 class Landing extends Component {
-    async fetchData() {
-        const res = await youtube.get('/videos', {
-            params: {
-                id: 'qAB1YaJDNbE',
-            },
-        });
-        console.log(res);
-    }
-
     async componentDidMount() {
-        const res = await axios.get('/api/test');
+        console.log('fetch videos from database');
+        const res = await axios.get('/api/videos');
         console.log(res.data);
+        const videos = res.data.videos;
     }
 
     render() {
         return (
             <div id="app">
                 <h1>Landing</h1>
-                <button onClick={this.fetchData}>fetch data</button>
+                
             </div>
         );
     }

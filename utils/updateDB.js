@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const chalk = require('chalk');
+const moment = require('moment');
 
 const axios = require('../services/axios');
 const keys = require('../config/keys');
@@ -74,7 +76,6 @@ async function updateDb() {
         } else {
             for (let j = 0; j < videoDetail.length; j++) {
                 if (fetchVideos[i].id === videoDetail[j].youtubeId) {
-                    console.log('this is the match ', fetchVideos[i].id);
                     const video = {
                         youtubeId: fetchVideos[i].id,
                         title: fetchVideos[i].snippet.title,
@@ -93,8 +94,6 @@ async function updateDb() {
             }
         }
     }
-    console.log('videos');
-    console.log(videos);
 
     if (videoDetail.length === 0) {
         console.log('db is empty');
@@ -103,7 +102,7 @@ async function updateDb() {
             videos: videos,
             lastUpdated: Date.now(),
         }).save();
-        console.log('complete post data to database');
+        console.log(chalk.green.inverse('complete post data to database!'));
     } else {
         console.log('database is not empty -> update database');
         const afterUpdate = await VideoDetail.updateOne(
@@ -112,13 +111,15 @@ async function updateDb() {
                 $set: { videos: videos, lastUpdated: Date.now() },
             }
         );
-        console.log('update complete');
+        console.log('Time' + moment().format());
+        console.log(chalk.green.inverse('update complete'));
+        console.log('-------------------------------------------');
     }
 }
 module.exports = () => {
     const allow = true;
 
-    const interval = 5000;
+    const interval = 5 * 60 * 1000;
     setInterval(async () => {
         console.log('inside interval');
         if (allow) {

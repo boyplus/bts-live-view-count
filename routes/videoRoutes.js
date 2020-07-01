@@ -3,9 +3,19 @@ const axios = require('../services/axios');
 
 const keys = require('../config/keys');
 const VideoList = mongoose.model('videoList');
+const VideoDetail = mongoose.model('videoDetail');
 
 module.exports = (app) => {
     app.get('/api/videos', async (req, res) => {
+        try {
+            const videos = await VideoDetail.find({});
+            res.send(videos[0]);
+        } catch (err) {
+            res.status(500).send(err);
+        }
+    });
+
+    app.get('/api/videoList', async (req, res) => {
         const { name } = req.body;
         const videos = await VideoList.find({ name });
         res.send(videos);
