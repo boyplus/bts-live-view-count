@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import Landing from './Landing';
 import Admin from './Admin/Admin';
+import './style.css';
 
 class App extends Component {
     render() {
