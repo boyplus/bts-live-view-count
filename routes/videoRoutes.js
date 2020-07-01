@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const axios = require('axios');
+const axios = require('../services/axios');
 
 const keys = require('../config/keys');
 const VideoList = mongoose.model('videoList');
@@ -13,20 +13,33 @@ module.exports = (app) => {
 
     app.post('/api/video', async (req, res) => {
         const { youtubeId } = req.body;
-        const videoDetail = await axios.get(
-            'https://www.googleapis.com/youtube/v3/videos/',
-            {
+        let videoDetail = null;
+        try {
+            videoDetail = await axios.get('/videos', {
                 params: {
-                    part: 'snippet,statistics',
-                    key: keys.apiKey,
                     id: youtubeId,
                 },
+            });
+        } catch (err) {
+            console.log('we cannot use first key, try to use second key.');
+            try {
+                videoDetail = await axios.get('/videos', {
+                    params: {
+                        id: youtubeId,
+                        key: keys.apiKey2,
+                    },
+                });
+            } catch (err) {
+                console.log('Both key are not working');
+                res.status(500).send({
+                    msg: 'Google api key are not working!',
+                });
             }
-        );
-        if (videoDetail.data.items.length == 0) {
-            res.send({ msg: 'This video is unavailable' });
+        }
+
+        if (videoDetail === null || videoDetail.data.items.length == 0) {
+            res.status(400).send({ msg: 'This video is unavailable' });
         } else {
-            console.log(videoDetail.data);
             const existingVideo = await VideoList.findOne({ youtubeId });
             if (existingVideo) {
                 res.send({ msg: 'This video already in database!' });
