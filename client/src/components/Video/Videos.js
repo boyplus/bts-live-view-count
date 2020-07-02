@@ -5,7 +5,7 @@ import Video from './Video';
 
 class Videos extends Component {
     renderVideos() {
-        if (this.props.videos === null) {
+        if (this.props.videos === null || this.props.config === null) {
             return null;
         }
         for (let i = 0; i < this.props.videos.videos.length; i++) {
@@ -19,6 +19,7 @@ class Videos extends Component {
                 <div key={video.youtubeId}>
                     <Video
                         video={video}
+                        times={this.props.config.times}
                     ></Video>
                 </div>
             );

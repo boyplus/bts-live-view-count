@@ -8,8 +8,11 @@ import Header from './Header';
 import Videos from './Video/Videos';
 
 class Landing extends Component {
+    state = { config: null };
     async componentDidMount() {
         await this.props.fetchVideos();
+        const config = (await axios.get('/api/config')).data;
+        this.setState({ config });
         console.log('First time fetch data from database');
         let times = 5 * 60 * 1000;
         times = 10000;
@@ -24,7 +27,10 @@ class Landing extends Component {
             <div id="app">
                 <Header></Header>
                 <h1>Landing</h1>
-                <Videos videos={this.props.videos}></Videos>
+                <Videos
+                    videos={this.props.videos}
+                    config={this.state.config}
+                ></Videos>
             </div>
         );
     }

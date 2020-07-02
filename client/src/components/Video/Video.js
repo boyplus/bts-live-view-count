@@ -7,19 +7,34 @@ class Video extends Component {
         nowView: parseInt(this.props.video.oldView, 10),
     };
 
+    state = {
+        ...this.state,
+        interval: this.props.times / (this.state.newView - this.state.oldView),
+    };
+
     componentDidMount() {
         const deltaView = this.state.newView - this.state.oldView;
-        const times = 5 * 60 * 1000;
+        const times = this.props.times;
         const interval = times / deltaView;
 
-        console.log('props');
-        console.log(this.props);
+        // console.log('props');
+        // console.log(this.props.video);
+        // console.log('delta view');
+        // console.log(deltaView);
+        // console.log('interval is ', interval);
+        // console.log('times is ', this.props.times);
+        console.log(
+            'diff is',
+            deltaView,
+            ' interval in state ',
+            this.state.interval
+        );
 
         setInterval(() => {
             if (this.state.nowView < this.state.newView) {
                 this.setState({ nowView: this.state.nowView + 1 });
             }
-        }, interval);
+        }, this.state.interval);
     }
 
     componentDidUpdate(previousProps, previousState) {
@@ -33,6 +48,7 @@ class Video extends Component {
             });
         }
     }
+
     renderVideo() {
         return (
             <div>

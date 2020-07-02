@@ -4,6 +4,7 @@ const axios = require('../services/axios');
 const keys = require('../config/keys');
 const VideoList = mongoose.model('videoList');
 const VideoDetail = mongoose.model('videoDetail');
+const Config = mongoose.model('configs');
 
 module.exports = (app) => {
     app.get('/api/videos', async (req, res) => {
@@ -64,5 +65,11 @@ module.exports = (app) => {
                 res.send(newVideo);
             }
         }
+    });
+
+    app.get('/api/config', async (req, res) => {
+        const config = await Config.find({ type: 'BTS' });
+        const { times, allow } = config[0];
+        res.send({ times, allow });
     });
 };
