@@ -46,16 +46,16 @@ module.exports = (app) => {
         }
     });
 
-    app.patch('/api/config/allow', async (req, res) => {
-        const { allow } = req.body;
-        const newConfig = await Config.updateOne(
-            { type: 'BTS' },
-            {
-                $set: {
-                    allow: allow,
-                },
-            }
-        );
-        res.send({ msg: 'Update allow config complete' });
-    });
+    // app.patch('/api/config/allow', async (req, res) => {
+    //     const { allow } = req.body;
+    //     const newConfig = await Config.updateOne(
+    //         { type: 'BTS' },
+    //         {
+    //             $set: {
+    //                 allow: allow,
+    //             },
+    //         }
+    //     );
+    //     res.send({ msg: 'Update allow config complete' });
+    // });
 };

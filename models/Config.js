@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const ConfigSchema = new Schema({
     type: { type: String, default: 'BTS' },
-    allow: { type: Boolean, default: true },
+    allow: { type: String, default: true },
     times: { type: Number, default: 300000 },
 });
 

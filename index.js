@@ -30,15 +30,16 @@ require('./routes/authRoutes')(app);
 require('./routes/adminRoutes')(app);
 require('./routes/videoRoutes')(app);
 
-require('./utils/updateDB')();
-console.log(chalk.green.inverse('Start node server'));
-
 if (process.env.NODE_ENV === 'production') {
+    require('./utils/updateDB')();
+    console.log(chalk.green.inverse('Start node server in production'));
     app.use(express.static('client/build'));
     const path = require('path');
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     });
+} else {
+    console.log(chalk.green.inverse('Start node server in development'));
 }
 
 const PORT = process.env.PORT || 5000;
