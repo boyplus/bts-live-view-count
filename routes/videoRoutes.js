@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const axios = require('../services/axios');
 
 const keys = require('../config/keys');
+const parseToNumber = require('../utils/parseDetailToNumber');
 const VideoList = mongoose.model('videoList');
 const VideoDetail = mongoose.model('videoDetail');
 const Config = mongoose.model('configs');
@@ -9,11 +10,14 @@ const Config = mongoose.model('configs');
 module.exports = (app) => {
     app.get('/api/videos', async (req, res) => {
         try {
+            const videoList = await VideoList.find({});
             const videos = await VideoDetail.find({});
-            const response = {
+            let response = {
                 videos: videos[0].videos,
                 lastUpdated: videos[0].lastUpdated,
             };
+            parseToNumber(response);
+            console.log(videoList);
             res.send(response);
         } catch (err) {
             res.status(500).send(err);
@@ -65,6 +69,19 @@ module.exports = (app) => {
                 res.send(newVideo);
             }
         }
+    });
+
+    app.patch('/api/video', async (req, res) => {
+        const { youtubeId, displayTitle } = req.body;
+        const updatedVideo = await VideoList.updateOne(
+            { youtubeId },
+            {
+                $set: {
+                    displayTitle: displayTitle,
+                },
+            }
+        );
+        res.send({ msg: 'Update video title complete!' });
     });
 
     app.get('/api/config', async (req, res) => {
