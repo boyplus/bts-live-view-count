@@ -1,5 +1,5 @@
-module.exports = (res) => {
-    res.videos.forEach(video => {
+module.exports = (videos) => {
+    videos.videos.forEach(video => {
         video.oldView = parseInt(video.oldView);
         video.oldLike = parseInt(video.oldLike);
         video.oldDislike = parseInt(video.oldDislike);

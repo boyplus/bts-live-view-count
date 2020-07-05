@@ -3,6 +3,7 @@ const axios = require('../services/axios');
 
 const keys = require('../config/keys');
 const parseToNumber = require('../utils/parseDetailToNumber');
+const setDisplayTitle = require('../utils/setDisplayTitle');
 const VideoList = mongoose.model('videoList');
 const VideoDetail = mongoose.model('videoDetail');
 const Config = mongoose.model('configs');
@@ -17,7 +18,7 @@ module.exports = (app) => {
                 lastUpdated: videos[0].lastUpdated,
             };
             parseToNumber(response);
-            console.log(videoList);
+            setDisplayTitle(response,videoList);
             res.send(response);
         } catch (err) {
             res.status(500).send(err);

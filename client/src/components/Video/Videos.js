@@ -8,11 +8,12 @@ class Videos extends Component {
         if (this.props.videos === null || this.props.config === null) {
             return null;
         }
-        for (let i = 0; i < this.props.videos.videos.length; i++) {
-            this.props.videos.videos[i].nowView = this.props.videos.videos[
-                i
-            ].oldView;
-        }
+        const videos = this.props.videos.videos;
+        videos.forEach(video => {
+            video.nowView = video.oldView;
+            video.nowLike = video.oldLike;
+            video.nowDislike = video.oldDislike;
+        });
 
         return this.props.videos.videos.map((video, index) => {
             return (
