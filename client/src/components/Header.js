@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom';
 import './style.css';
 
 class Header extends Component {
     openNav() {
         console.log('open');
-        document.getElementById('mySidenav').style.width = '250px';
+        document.getElementById('mySidenav').style.width = '300px';
     }
     closeNav() {
         console.log('close');
@@ -18,10 +18,13 @@ class Header extends Component {
                     <a className="closebtn" onClick={this.closeNav}>
                         &times;
                     </a>
-                    <a href="#">About</a>
-                    <a href="#">Services</a>
-                    <a href="#">Clients</a>
-                    <a href="#">Contact</a>
+                    <span className="textMenu">Sort by</span>
+                    <ul>
+                        <li>Most popular</li>
+                        <li>Date added (oldest)</li>
+                        <li>Date added (newest)</li>
+                    </ul>
+                    <Link className="textMenu">Admin</Link>
                 </div>
                 <div id="header">
                     <h1 id="textHeader">BTS live view count</h1>

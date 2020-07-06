@@ -14,36 +14,57 @@
     height: 100%;
     width: 0;
     position: fixed;
-    z-index: 1;
+    z-index: 5;
     top: 0;
     right: 0;
-    background-color:whitesmoke;
+    background-color: rgb(250, 250, 250);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     overflow-x: hidden;
     transition: 0.25s;
     padding-top: 60px;
 }
 
-.sidenav a {
+.sidenav .textMenu {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 1.7rem;
     letter-spacing: 2.3px;
-    color:black;
+    color: black;
     display: block;
     transition: 0.25s;
 }
 
-.sidenav a:hover {
+.sidenav ul {
+    list-style-type: none;
+}
+
+.sidenav ul li {
+    list-style-type: none;
+    padding: 8px 8px 8px 8px;
+    text-decoration: none;
+    font-size: 1.25rem;
+    color: black;
+    display: block;
+    transition: 0.25s;
+}
+
+.sidenav ul li:hover {
     color: grey;
+    cursor: pointer;
 }
 
 .sidenav .closebtn {
     position: absolute;
     top: 0;
     right: 25px;
-    font-size: 36px;
+    font-size: 45px;
     margin-left: 50px;
+    transition: 0.25s;
+}
+
+.sidenav .closebtn:hover {
+    color: grey;
+    transition: 0.25s;
 }
 
 @media screen and (max-height: 450px) {
