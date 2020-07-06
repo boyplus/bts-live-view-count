@@ -1,15 +1,36 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 import './style.css';
 
 class Header extends Component {
     openNav() {
-        console.log('open');
         document.getElementById('mySidenav').style.width = '300px';
     }
     closeNav() {
-        console.log('close');
         document.getElementById('mySidenav').style.width = '0';
+    }
+    renderContent() {
+        switch (this.props.auth) {
+            case null:
+                return;
+            case false:
+                return (
+                    <li>
+                        <a href="/auth/google">Login with google</a>
+                    </li>
+                );
+            default:
+                return [
+                    <li key="1">
+                        <Link to="/admin">Manage website</Link>
+                    </li>,
+                    <li key="2">
+                        <a href="/api/logout">Logout</a>
+                    </li>,
+                ];
+        }
     }
     render() {
         return (
@@ -24,7 +45,8 @@ class Header extends Component {
                         <li>Date added (oldest)</li>
                         <li>Date added (newest)</li>
                     </ul>
-                    <Link className="textMenu">Admin</Link>
+                    <span className="textMenu">Admin</span>
+                    <ul>{this.renderContent()}</ul>
                 </div>
                 <div id="header">
                     <h1 id="textHeader">BTS live view count</h1>
@@ -37,4 +59,9 @@ class Header extends Component {
     }
 }
 
-export default Header;
+function mapeStateToProps(state) {
+    return {
+        auth: state.auth,
+    };
+}
+export default connect(mapeStateToProps)(Header);

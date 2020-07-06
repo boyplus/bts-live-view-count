@@ -79,6 +79,12 @@ class Video extends Component {
         }
     }
 
+    componentWillUnmount() {
+        clearInterval(this.myViewInterval);
+        clearInterval(this.myLikeInterval);
+        clearInterval(this.myDislikeInterval);
+    }
+
     renderNumber(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }

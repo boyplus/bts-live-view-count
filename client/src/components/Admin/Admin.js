@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Header from './Header';
 
@@ -14,4 +15,8 @@ class Admin extends Component {
     }
 }
 
-export default Admin;
+function mapStateToProps(state) {
+    return { auth: state.auth };
+}
+
+export default connect(mapStateToProps)(Admin);
