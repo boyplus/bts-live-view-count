@@ -93,16 +93,21 @@ class Video extends Component {
     getURL() {
         return `https://www.youtube.com/watch?v=${this.props.video.youtubeId}`;
     }
-    
+
     renderVideo() {
         return (
             <div id="video" className="card">
-                <a href={this.getURL()} target="_blank">
+                <a
+                    href={this.getURL()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
                     <img
                         className="center-cropped"
                         src={this.props.video.pic.url}
                         width="100%"
                         height="auto"
+                        alt={this.props.video.displayTitle}
                     ></img>
                 </a>
 
@@ -126,13 +131,17 @@ class Video extends Component {
                         }}
                     >
                         <div>
-                            <i className="heart icon"></i>
-                            {this.renderNumber(this.state.nowLike)}
+                            <i className="thumbs up icon"></i>
+                            <span style={{ marginLeft: '5px' }}>
+                                {this.renderNumber(this.state.nowLike)}
+                            </span>
                         </div>
 
                         <div>
-                            <i className="heart outline icon"></i>
-                            {this.renderNumber(this.state.nowDislike)}
+                            <i className="thumbs down icon"></i>
+                            <span style={{ marginLeft: '5px' }}>
+                                {this.renderNumber(this.state.nowDislike)}
+                            </span>
                         </div>
                     </div>
                 </div>

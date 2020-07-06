@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 class Header extends Component {
-    renderAdmin() {
-        
-    }
+    renderAdmin() {}
     render() {
         return (
             <div>
                 <div className="ui secondary pointing menu">
-                    <a className="active item large text">Videos</a>
-                    <a className="item large text">Users</a>
-                    <a className="item large text">Admins</a>
+                    <Link className="active item large text">Videos</Link>
+                    <Link className="item large text">Users</Link>
+                    <Link className="item large text">Admins</Link>
                     <div className="right menu">
-                        <a className="ui item large text">Logout</a>
+                        <Link className="ui item large text">Logout</Link>
                     </div>
                 </div>
             </div>

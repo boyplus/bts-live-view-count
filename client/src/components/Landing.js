@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -6,7 +5,6 @@ import axios from 'axios';
 import * as actions from '../actions';
 import Header from './Header';
 import Videos from './Video/Videos';
-import Footer from './Footer';
 
 class Landing extends Component {
     state = { config: null };
