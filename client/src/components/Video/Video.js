@@ -86,6 +86,10 @@ class Video extends Component {
         }
     }
 
+    renderNumber(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
     renderVideo() {
         return (
             <div id="video" className="card">
@@ -104,7 +108,7 @@ class Video extends Component {
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         <i className="eye icon"></i>
                         <h4 style={{ marginLeft: '5px' }}>
-                            {this.state.nowView}
+                            {this.renderNumber(this.state.nowView)}
                         </h4>
                     </div>
 
@@ -112,16 +116,17 @@ class Video extends Component {
                         style={{
                             display: 'flex',
                             justifyContent: 'space-between',
+                            marginTop: '5px',
                         }}
                     >
                         <div>
                             <i className="heart icon"></i>
-                            {this.state.nowLike}
+                            {this.renderNumber(this.state.nowLike)}
                         </div>
 
                         <div>
                             <i className="heart outline icon"></i>
-                            {this.state.nowDislike}
+                            {this.renderNumber(this.state.nowDislike)}
                         </div>
                     </div>
                 </div>
