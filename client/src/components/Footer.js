@@ -14,14 +14,14 @@ class Footer extends Component {
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    <i class="big github icon"></i>
+                    <i className="big github icon"></i>
                 </a>
                 <a
                     href="https://www.facebook.com/thanaphon.sombunkaeo/"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    <i class="big facebook icon"></i>
+                    <i className="big facebook icon"></i>
                 </a>
             </div>
         );

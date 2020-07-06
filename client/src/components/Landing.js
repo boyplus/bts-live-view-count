@@ -12,12 +12,10 @@ class Landing extends Component {
         await this.props.fetchVideos();
         const config = (await axios.get('/api/config')).data;
         this.setState({ config });
-        console.log('First time fetch data from database');
         let times = 5 * 60 * 1000;
         times = 10000;
         setInterval(async () => {
             await this.props.fetchVideos();
-            console.log('fetch data from database again');
         }, times);
     }
 

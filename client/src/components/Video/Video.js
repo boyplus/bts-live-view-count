@@ -63,12 +63,6 @@ class Video extends Component {
     }
 
     componentDidMount() {
-        console.log(
-            this.props.video.displayTitle,
-            ' viewInterval is ',
-            this.state.viewInterval
-        );
-        console.log(this.props.video);
         this.updateInterval(
             this.state.viewInterval,
             this.state.likeInterval,
@@ -78,7 +72,6 @@ class Video extends Component {
 
     componentDidUpdate(previousProps, previousState) {
         if (previousProps.video.newView !== this.props.video.newView) {
-            console.log('update state ', this.props.video.title);
             clearInterval(this.myViewInterval);
             clearInterval(this.myLikeInterval);
             clearInterval(this.myDislikeInterval);
