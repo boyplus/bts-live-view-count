@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../style.css';
 
 class Video extends Component {
     constructor(props) {
@@ -67,6 +68,7 @@ class Video extends Component {
             ' viewInterval is ',
             this.state.viewInterval
         );
+        console.log(this.props.video);
         this.updateInterval(
             this.state.viewInterval,
             this.state.likeInterval,
@@ -86,11 +88,43 @@ class Video extends Component {
 
     renderVideo() {
         return (
-            <div>
-                {this.props.video.displayTitle}
-                {this.state.nowView} {' - '}
-                {this.state.nowLike} {' - '}
-                {this.state.nowDislike}
+            <div id="video" className="card">
+                <img
+                    className="center-cropped"
+                    src={this.props.video.pic.url}
+                    width="100%"
+                    height="auto"
+                ></img>
+
+                <div style={{ padding: '10px' }}>
+                    <div style={{ minHeight: '60px' }}>
+                        <h4>{this.props.video.displayTitle}</h4>
+                    </div>
+
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <i className="eye icon"></i>
+                        <h4 style={{ marginLeft: '5px' }}>
+                            {this.state.nowView}
+                        </h4>
+                    </div>
+
+                    <div
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                        }}
+                    >
+                        <div>
+                            <i className="heart icon"></i>
+                            {this.state.nowLike}
+                        </div>
+
+                        <div>
+                            <i className="heart outline icon"></i>
+                            {this.state.nowDislike}
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

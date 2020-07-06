@@ -26,7 +26,6 @@ class Landing extends Component {
         return (
             <div id="app">
                 <Header></Header>
-                <h1>Landing</h1>
                 <Videos
                     videos={this.props.videos}
                     config={this.state.config}
