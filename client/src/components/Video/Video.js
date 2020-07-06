@@ -98,8 +98,7 @@ class Video extends Component {
                     <img
                         className="center-cropped"
                         src={this.props.video.pic.url}
-                        width="100%"
-                        height="auto"
+                        width="640px"
                         alt={this.props.video.displayTitle}
                     ></img>
                 </a>

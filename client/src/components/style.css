@@ -127,6 +127,17 @@
     object-position: center;
     width: 100%;
     height: auto;
+    background-color: red;
+}
+
+.fakeText {
+    background-color: #e2e2e2;
+    color: #e2e2e2;
+    display: flex;
+}
+
+.marginLeft{
+    margin-left: 5px;
 }
 
 .footer {
