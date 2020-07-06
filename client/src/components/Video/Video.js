@@ -90,15 +90,21 @@ class Video extends Component {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
 
+    getURL() {
+        return `https://www.youtube.com/watch?v=${this.props.video.youtubeId}`;
+    }
+    
     renderVideo() {
         return (
             <div id="video" className="card">
-                <img
-                    className="center-cropped"
-                    src={this.props.video.pic.url}
-                    width="100%"
-                    height="auto"
-                ></img>
+                <a href={this.getURL()} target="_blank">
+                    <img
+                        className="center-cropped"
+                        src={this.props.video.pic.url}
+                        width="100%"
+                        height="auto"
+                    ></img>
+                </a>
 
                 <div style={{ padding: '10px' }}>
                     <div style={{ minHeight: '60px' }}>
