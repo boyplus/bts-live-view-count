@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 
-class ManageUser extends Component {
+class ManageVideo extends Component {
     render() {
         return (
             <div>
-                <h1>Hello Manage user</h1>
+                <h1>This is manage video</h1>
             </div>
         );
     }
 }
-export default ManageUser;
+
+export default ManageVideo;

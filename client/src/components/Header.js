@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import * as actions from '../actions';
-import './style.css';
+import './styles/style.css';
 import './styles/Header.css';
 
 class Header extends Component {
@@ -27,7 +27,7 @@ class Header extends Component {
             default:
                 return [
                     <li key="1">
-                        <Link to="/admin">Manage website</Link>
+                        <Link to="/admin/videos">Manage website</Link>
                     </li>,
                     <li key="2">
                         <a href="/api/logout">Logout</a>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import '../style.css';
+import '../styles/style.css';
 
 class VideoSkeleton extends Component {
     render() {

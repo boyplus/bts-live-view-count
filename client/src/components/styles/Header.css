@@ -48,6 +48,20 @@
     transition: 0.25s;
 }
 
+.sidenav a {
+    color: inherit;
+    transition: 0.25s;
+}
+
+.sidenav a:hover,
+a:focus,
+a:active {
+    text-decoration: none;
+    color: grey;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
 .bold {
     font-weight: 700;
 }
@@ -57,8 +71,8 @@
 }
 
 .link:hover {
-    color: grey;
-    cursor: pointer;
+    color: grey !important;
+    cursor: pointer !important;
 }
 
 .sidenav .closebtn {

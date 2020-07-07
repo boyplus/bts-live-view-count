@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../style.css';
+import '../styles/style.css';
 
 class Video extends Component {
     constructor(props) {

@@ -6,7 +6,8 @@ import * as actions from '../actions';
 import Landing from './Landing';
 import Admin from './Admin/Admin';
 import ManageUser from './Admin/ManageUser';
-import './style.css';
+import ManageVideo from './Admin/ManageVideo';
+import './styles/style.css';
 
 class App extends Component {
     async componentDidMount() {
@@ -19,6 +20,10 @@ class App extends Component {
                     <div>
                         <Route exact path="/" component={Landing}></Route>
                         <Route path="/admin" component={Admin}></Route>
+                        <Route
+                            path="/admin/videos"
+                            component={ManageVideo}
+                        ></Route>
                         <Route
                             path="/admin/users"
                             component={ManageUser}
