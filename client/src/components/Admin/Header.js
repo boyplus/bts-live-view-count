@@ -51,7 +51,9 @@ class Header extends Component {
                 <div style={{ display: 'flex' }}>
                     {this.renderUsername()}
                     <li>
-                        <a href="/api/logout">Signout</a>
+                        <a href="/api/logout" className="linkAdmin">
+                            Signout
+                        </a>
                         <i
                             className="sign-out icon"
                             style={{ marginLeft: '6px' }}

@@ -82,6 +82,7 @@ a:active {
     font-size: 45px;
     margin-left: 50px;
     transition: 0.25s;
+    cursor: pointer;
 }
 
 .sidenav .closebtn:hover {

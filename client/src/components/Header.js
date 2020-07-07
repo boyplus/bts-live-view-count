@@ -61,9 +61,9 @@ class Header extends Component {
         return (
             <div>
                 <div id="mySidenav" className="sidenav">
-                    <a className="closebtn" onClick={this.closeNav}>
+                    <span className="closebtn" onClick={this.closeNav}>
                         &times;
-                    </a>
+                    </span>
                     <span className="textMenu">Sort by</span>
                     <ul>{this.renderSortBy()}</ul>
                     <span className="textMenu">Admin</span>
