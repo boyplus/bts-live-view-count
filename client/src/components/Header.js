@@ -11,7 +11,7 @@ class Header extends Component {
     closeNav() {
         document.getElementById('mySidenav').style.width = '0';
     }
-    renderContent() {
+    renderAdmin() {
         switch (this.props.auth) {
             case null:
                 return;
@@ -41,12 +41,13 @@ class Header extends Component {
                     </a>
                     <span className="textMenu">Sort by</span>
                     <ul>
-                        <li>Most popular</li>
+                        <li>Most view</li>
+                        <li>Most like</li>
                         <li>Date added (oldest)</li>
                         <li>Date added (newest)</li>
                     </ul>
                     <span className="textMenu">Admin</span>
-                    <ul>{this.renderContent()}</ul>
+                    <ul>{this.renderAdmin()}</ul>
                 </div>
                 <div id="header">
                     <h1 id="textHeader">BTS live view count</h1>

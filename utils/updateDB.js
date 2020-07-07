@@ -65,6 +65,7 @@ async function updateDb() {
                 youtubeId: fetchVideos[i].id,
                 title: fetchVideos[i].snippet.title,
                 pic: fetchVideos[i].snippet.thumbnails.standard,
+                publishedAt: fetchVideos[i].snippet.publishedAt,
                 oldView: fetchVideos[i].statistics.viewCount,
                 oldLike: fetchVideos[i].statistics.likeCount,
                 oldDislike: fetchVideos[i].statistics.dislikeCount,
@@ -81,6 +82,7 @@ async function updateDb() {
                         youtubeId: fetchVideos[i].id,
                         title: fetchVideos[i].snippet.title,
                         pic: fetchVideos[i].snippet.thumbnails.standard,
+                        publishedAt: fetchVideos[i].snippet.publishedAt,
                         oldView: videoDetail[j].newView,
                         oldLike: videoDetail[j].newLike,
                         oldDislike: videoDetail[j].newDislike,
@@ -125,7 +127,6 @@ const getConfig = async () => {
         times: config[0].times,
     };
 };
-
 
 module.exports = async () => {
     let allow = false;
