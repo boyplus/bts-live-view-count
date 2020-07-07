@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import * as actions from '../actions';
 import './style.css';
+import './styles/Header.css';
 
 class Header extends Component {
     openNav() {
@@ -35,7 +36,7 @@ class Header extends Component {
         }
     }
     getClass(name) {
-        return name === this.props.setting.sortBy ? 'bold' : '';
+        return name === this.props.setting.sortBy ? 'bold' : 'link';
     }
     renderSortBy() {
         const links = [
