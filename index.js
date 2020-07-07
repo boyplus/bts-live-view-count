@@ -31,7 +31,7 @@ require('./routes/adminRoutes')(app);
 require('./routes/videoRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
-    require('./utils/updateDB')();
+    require('./utils/updateDBInterval')();
     console.log(chalk.green.inverse('Start node server in production'));
     app.use(express.static('client/build'));
     const path = require('path');
