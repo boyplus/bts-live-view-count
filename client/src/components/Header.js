@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -32,6 +33,24 @@ class Header extends Component {
                 ];
         }
     }
+    getClass(name) {
+        return name === this.props.setting.sortBy ? 'bold' : '';
+    }
+    renderSortBy() {
+        const links = [
+            { text: 'Most view', name: 'view' },
+            { text: 'Most like', name: 'like' },
+            { text: 'Date added (oldest)', name: 'oldest' },
+            { text: 'Date added (newest)', name: 'newest' },
+        ];
+        return _.map(links, ({ text, name }) => {
+            return (
+                <li className={this.getClass(name)} key={name}>
+                    {text}
+                </li>
+            );
+        });
+    }
     render() {
         return (
             <div>
@@ -40,12 +59,7 @@ class Header extends Component {
                         &times;
                     </a>
                     <span className="textMenu">Sort by</span>
-                    <ul>
-                        <li>Most view</li>
-                        <li>Most like</li>
-                        <li>Date added (oldest)</li>
-                        <li>Date added (newest)</li>
-                    </ul>
+                    <ul>{this.renderSortBy()}</ul>
                     <span className="textMenu">Admin</span>
                     <ul>{this.renderAdmin()}</ul>
                 </div>
@@ -63,6 +77,7 @@ class Header extends Component {
 function mapeStateToProps(state) {
     return {
         auth: state.auth,
+        setting: state.setting,
     };
 }
 export default connect(mapeStateToProps)(Header);
