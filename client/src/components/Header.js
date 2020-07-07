@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import * as actions from '../actions';
 import './style.css';
 
 class Header extends Component {
@@ -15,7 +16,7 @@ class Header extends Component {
     renderAdmin() {
         switch (this.props.auth) {
             case null:
-                return;
+                return <li>Loading...</li>;
             case false:
                 return (
                     <li>
@@ -45,7 +46,11 @@ class Header extends Component {
         ];
         return _.map(links, ({ text, name }) => {
             return (
-                <li className={this.getClass(name)} key={name}>
+                <li
+                    className={this.getClass(name)}
+                    key={name}
+                    onClick={() => this.props.updateSetting({ sortBy: name })}
+                >
                     {text}
                 </li>
             );
@@ -80,4 +85,4 @@ function mapeStateToProps(state) {
         setting: state.setting,
     };
 }
-export default connect(mapeStateToProps)(Header);
+export default connect(mapeStateToProps, actions)(Header);
