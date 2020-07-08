@@ -62,6 +62,10 @@ a:active {
     transition: 0.25s;
 }
 
+a:hover {
+    text-decoration: none;
+}
+
 .bold {
     font-weight: 700;
 }

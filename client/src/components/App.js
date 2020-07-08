@@ -6,7 +6,7 @@ import * as actions from '../actions';
 import Landing from './Landing';
 import Admin from './Admin/Admin';
 import ManageUser from './Admin/ManageUser';
-import ManageVideo from './Admin/ManageVideo';
+import ManageVideo from './Admin/Video/ManageVideo';
 import './styles/style.css';
 
 class App extends Component {

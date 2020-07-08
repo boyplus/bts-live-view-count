@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import Header from './Header';
 import './style.css';
@@ -9,15 +10,18 @@ class Admin extends Component {
     renderContent() {
         if (!this.props.auth) return null;
         if (this.props.auth.role === 'admin') {
-            return (
-                <Header>
-                    <h1>Admin Page</h1>
-                </Header>
-            );
+            return <Header></Header>;
         } else {
             return (
                 <div id="notAdmin">
                     <h1>You are not an admin</h1>
+                    <div style={{ textAlign: 'center' }}>
+                        <Link to="/">
+                            <button className="ui secondary button">
+                                Go to live view
+                            </button>
+                        </Link>
+                    </div>
                 </div>
             );
         }

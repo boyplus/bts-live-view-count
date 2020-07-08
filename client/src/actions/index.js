@@ -4,6 +4,7 @@ import {
     FETCH_VIDEOS,
     UPDATE_SETTING,
     UPDATE_VIDEOS,
+    FETCH_VIDEO_LIST,
 } from './types';
 
 import sortVideo from '../utils/sortVideo';
@@ -18,6 +19,11 @@ export const fetchVideos = () => async (dispatch, getState) => {
     const sortBy = getState().setting.sortBy;
     sortVideo(res.data.videos, sortBy);
     dispatch({ type: FETCH_VIDEOS, payload: res.data });
+};
+
+export const fetchVideoList = () => async (dispatch) => {
+    const res = await axios.get('/api/videoList');
+    dispatch({ type: FETCH_VIDEO_LIST, payload: res.data });
 };
 
 export const updateSetting = (setting) => async (dispatch, getState) => {

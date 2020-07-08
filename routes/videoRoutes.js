@@ -8,6 +8,8 @@ const VideoList = mongoose.model('videoList');
 const VideoDetail = mongoose.model('videoDetail');
 const Config = mongoose.model('configs');
 
+const updateDB = require('../utils/updateDB');
+
 module.exports = (app) => {
     app.get('/api/videos', async (req, res) => {
         try {
@@ -18,7 +20,7 @@ module.exports = (app) => {
                 lastUpdated: videos[0].lastUpdated,
             };
             parseToNumber(response);
-            setDisplayTitle(response,videoList);
+            setDisplayTitle(response, videoList);
             res.send(response);
         } catch (err) {
             res.status(500).send(err);
@@ -32,7 +34,7 @@ module.exports = (app) => {
     });
 
     app.post('/api/video', async (req, res) => {
-        const { youtubeId } = req.body;
+        const { youtubeId, displayTitle } = req.body;
         let videoDetail = null;
         try {
             videoDetail = await axios.get('/videos', {
@@ -62,12 +64,14 @@ module.exports = (app) => {
         } else {
             const existingVideo = await VideoList.findOne({ youtubeId });
             if (existingVideo) {
-                res.send({ msg: 'This video already in database!' });
+                res.status(400).send({ msg: 'This video already in database!' });
             } else {
                 const newVideo = await new VideoList({
                     youtubeId,
+                    displayTitle,
                 }).save();
-                res.send(newVideo);
+                await updateDB();
+                res.send({ msg: 'Add new video and update database complete' });
             }
         }
     });
@@ -83,6 +87,15 @@ module.exports = (app) => {
             }
         );
         res.send({ msg: 'Update video title complete!' });
+    });
+
+    app.patch('/api/updateDatabase', async (req, res) => {
+        try {
+            await updateDB();
+            res.send({ msg: 'Update database complet.' });
+        } catch (err) {
+            res.status.send({ msg: 'Fail to update database' });
+        }
     });
 
     app.get('/api/config', async (req, res) => {
