@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 
 import Header from './Header';
 import './style.css';
@@ -23,19 +22,6 @@ class Admin extends Component {
             );
         }
     }
-    redirect() {
-        const auth = this.props.auth;
-        if (this.state.redirected === false && auth && auth.role !== 'admin') {
-            this.setState({ redirected: true });
-            this.props.history.push('/admin');
-        }
-    }
-    componentDidMount() {
-        this.redirect();
-    }
-    componentDidUpdate() {
-        this.redirect();
-    }
     render() {
         return <div>{this.renderContent()}</div>;
     }
@@ -45,4 +31,4 @@ function mapStateToProps(state) {
     return { auth: state.auth };
 }
 
-export default connect(mapStateToProps)(withRouter(Admin));
+export default connect(mapStateToProps)(Admin);
