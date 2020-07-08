@@ -7,21 +7,21 @@ import './Header.css';
 
 class Header extends Component {
     state = { menu: 'Video' };
+    menus = [
+        { text: 'Video', to: '/admin/videos' },
+        { text: 'User', to: '/admin/users' },
+        { text: 'Admin', to: '/admin/admins' },
+        { text: 'Live view', to: '/' },
+    ];
     renderAdmin() {}
     getClass(menu) {
         return menu === this.state.menu ? 'bold' : 'link';
     }
     componentDidUpdate() {
-        console.log(this.props);
+        // console.log(this.props);
     }
     renderMenu() {
-        const menus = [
-            { text: 'Video', to: '/admin/videos' },
-            { text: 'User', to: '/admin/users' },
-            { text: 'Admin', to: '/admin/admins' },
-            { text: 'Live view', to: '/' },
-        ];
-        return _.map(menus, (menu, index) => {
+        return _.map(this.menus, (menu, index) => {
             return (
                 <li key={index}>
                     <Link
@@ -44,21 +44,52 @@ class Header extends Component {
             return null;
         }
     }
+    openNav() {
+        document.getElementById('myAdminSidenav').style.width = '250px';
+    }
+    closeNav() {
+        document.getElementById('myAdminSidenav').style.width = '0px';
+    }
+    renderUser() {
+        return (
+            <li>
+                <a href="/api/logout" className="linkAdmin">
+                    <span>Signout</span>
+                    <i
+                        className="sign-out icon"
+                        style={{ marginLeft: '6px' }}
+                    ></i>
+                </a>
+            </li>
+        );
+    }
     render() {
         return (
-            <div className="navbar">
-                <div style={{ display: 'flex' }}>{this.renderMenu()}</div>
-                <div style={{ display: 'flex' }}>
-                    {this.renderUsername()}
-                    <li>
-                        <a href="/api/logout" className="linkAdmin">
-                            Signout
-                        </a>
-                        <i
-                            className="sign-out icon"
-                            style={{ marginLeft: '6px' }}
-                        ></i>
-                    </li>
+            <div>
+                <div className="navbar">
+                    <div style={{ display: 'flex' }}>{this.renderMenu()}</div>
+                    <div style={{ display: 'flex' }}>
+                        {this.renderUsername()}
+                        {this.renderUser()}
+                    </div>
+                </div>
+                <div id="adminHamburger">
+                    <div className="menu" onClick={this.openNav}>
+                        <img
+                            src="https://cdn2.iconfinder.com/data/icons/4web-3/139/menu-512.png"
+                            alt="hamburger-icon"
+                            height="40px"
+                        ></img>
+                    </div>
+                </div>
+                <div id="myAdminSidenav" className="adminSidenav">
+                    <span className="closebtn" onClick={this.closeNav}>
+                        &times;
+                    </span>
+                    <ul>
+                        {this.renderMenu()}
+                        {this.renderUser()}
+                    </ul>
                 </div>
             </div>
         );

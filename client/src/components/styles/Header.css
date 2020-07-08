@@ -75,7 +75,7 @@ a:active {
     cursor: pointer !important;
 }
 
-.sidenav .closebtn {
+.closebtn {
     position: absolute;
     top: 0;
     right: 25px;
@@ -85,7 +85,7 @@ a:active {
     cursor: pointer;
 }
 
-.sidenav .closebtn:hover {
+.closebtn:hover {
     color: grey;
     transition: 0.25s;
 }

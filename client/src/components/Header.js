@@ -71,9 +71,13 @@ class Header extends Component {
                 </div>
                 <div id="header">
                     <h1 id="textHeader">BTS live view count</h1>
-                    <span className="hamburger" onClick={this.openNav}>
-                        &#9776;
-                    </span>
+                    <div className="menu" onClick={this.openNav}>
+                        <img
+                            src="https://cdn2.iconfinder.com/data/icons/4web-3/139/menu-512.png"
+                            alt="hamburger-icon"
+                            height="40px"
+                        ></img>
+                    </div>
                 </div>
             </div>
         );

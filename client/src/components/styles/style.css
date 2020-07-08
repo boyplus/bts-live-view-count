@@ -31,6 +31,13 @@
     }
 }
 
+@media only screen and (max-width: 340px) {
+    #textHeader {
+        font-size: 17px;
+        letter-spacing: 2px;
+    }
+}
+
 #video {
     margin-bottom: 25px;
 }
