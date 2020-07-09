@@ -32,6 +32,7 @@ class Video extends Component {
             youtubeId: this.props.video.youtubeId,
         };
         await axios.patch('/api/video', body);
+        await this.props.fetchVideoList();
         this.setState({ save: false });
     }
     async delete() {
