@@ -12,6 +12,7 @@ class Videos extends Component {
     render() {
         return (
             <div>
+                <h2>Edit video detail</h2>
                 {this.renderVideos()}
             </div>
         );

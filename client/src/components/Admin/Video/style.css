@@ -1,0 +1,42 @@
+#formVideo {
+    display: flex;
+    margin: 20px 0;
+    background-color: whitesmoke;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
+}
+#inputVideo {
+    width: 75%;
+}
+#btnVideo {
+    width: 25%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media only screen and (max-width: 1200px) {
+    #inputVideo {
+        width: 60%;
+    }
+    #btnVideo{
+        width: 40%;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    #formVideo {
+        flex-direction: column;
+        background-color: whitesmoke;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2);
+    }
+    #inputVideo {
+        width: 100%;
+    }
+    #btnVideo {
+        width: 100%;
+        margin-top: 15px;
+    }
+}

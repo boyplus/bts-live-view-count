@@ -64,7 +64,9 @@ module.exports = (app) => {
         } else {
             const existingVideo = await VideoList.findOne({ youtubeId });
             if (existingVideo) {
-                res.status(400).send({ msg: 'This video already in database!' });
+                res.status(400).send({
+                    msg: 'This video already in database!',
+                });
             } else {
                 const newVideo = await new VideoList({
                     youtubeId,
@@ -78,7 +80,7 @@ module.exports = (app) => {
 
     app.patch('/api/video', async (req, res) => {
         const { youtubeId, displayTitle } = req.body;
-        const updatedVideo = await VideoList.updateOne(
+        await VideoList.updateOne(
             { youtubeId },
             {
                 $set: {
@@ -89,12 +91,23 @@ module.exports = (app) => {
         res.send({ msg: 'Update video title complete!' });
     });
 
+    app.delete('/api/video', async (req, res) => {
+        const { youtubeId } = req.body;
+        try {
+            await VideoList.deleteOne({ youtubeId });
+            await updateDB();
+            res.send({ msg: 'Delete video complete' });
+        } catch (err) {
+            res.status(500).send({ msg: 'Fail to delete video' });
+        }
+    });
+
     app.patch('/api/updateDatabase', async (req, res) => {
         try {
             await updateDB();
             res.send({ msg: 'Update database complet.' });
         } catch (err) {
-            res.status.send({ msg: 'Fail to update database' });
+            res.status(500).send({ msg: 'Fail to update database' });
         }
     });
 

@@ -5,7 +5,7 @@ import axios from 'axios';
 import * as actions from '../../../actions';
 
 class AddVideo extends Component {
-    state = { url: '', name: '', errUrl: '', errName: '' };
+    state = { url: '', name: '', errUrl: '', errName: '', success: false };
     async onSubmit() {
         let youtubeId = this.state.url;
         const displayTitle = this.state.name;
@@ -15,7 +15,7 @@ class AddVideo extends Component {
             errName = 'You must enter the display title';
         if (youtubeId.length === 0)
             errUrl = 'You must enter the youtube url / youtube ID';
-        this.setState({ errName, errUrl });
+        this.setState({ errName, errUrl, success: false });
         if (errUrl || errName) return;
 
         if (youtubeId.length > 11) {
@@ -29,10 +29,22 @@ class AddVideo extends Component {
             });
             if (res.status === 200) {
                 this.setState({ errName: '', errUrl: '' });
+                this.setState({ success: true });
                 await this.props.fetchVideoList();
             }
         } catch (err) {
             this.setState({ errUrl: err.response.data.msg });
+        }
+    }
+    renderMessage() {
+        if (this.state.errName.length > 0) {
+            return <span style={{ color: 'red' }}>{this.state.errName}</span>;
+        } else if (this.state.success) {
+            return (
+                <span style={{ color: 'green' }}>Add new video complete</span>
+            );
+        } else {
+            return null;
         }
     }
     render() {
@@ -65,15 +77,18 @@ class AddVideo extends Component {
                             type="text"
                             placeholder="BTS 'ON' Kinetic Manifesto Film"
                         ></input>
-                        <div style={{ color: 'red', height: '2em' }}>
-                            {this.state.errName}
+                        <div style={{ height: '2em' }}>
+                            {this.renderMessage()}
                         </div>
                     </div>
-                    <div
-                        className="ui blue button"
-                        onClick={() => this.onSubmit()}
-                    >
-                        Add new video
+                    <div style={{ textAlign: 'right' }}>
+                        <div
+                            className="ui blue button"
+                            onClick={() => this.onSubmit()}
+                        >
+                            <i className="video icon"></i>
+                            Add new video
+                        </div>
                     </div>
                 </form>
             </div>
