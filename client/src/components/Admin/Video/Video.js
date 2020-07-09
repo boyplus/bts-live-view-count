@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
 
+import * as actions from '../../../actions';
 import './style.css';
 
 class Video extends Component {
@@ -23,7 +25,6 @@ class Video extends Component {
             return this.state.delete === true ? 'Deleting...' : 'Delete';
         }
     }
-    componentDidMount() {}
     async save() {
         this.setState({ save: true });
         const body = {
@@ -35,6 +36,11 @@ class Video extends Component {
     }
     async delete() {
         this.setState({ delete: true });
+        await axios.delete('/api/video', {
+            data: { youtubeId: this.props.video.youtubeId },
+        });
+        await this.props.fetchVideoList();
+        this.setState({ delete: false });
     }
     render() {
         return (
@@ -76,4 +82,4 @@ class Video extends Component {
     }
 }
 
-export default Video;
+export default connect(null, actions)(Video);
