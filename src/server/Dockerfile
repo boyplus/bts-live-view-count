@@ -1,6 +1,6 @@
 FROM node:18 AS base
 WORKDIR /usr/src/app
-EXPOSE 8080
+EXPOSE 3000
 
 FROM node:18-alpine AS client-build
 WORKDIR /usr/src/app
