@@ -32,6 +32,7 @@
     "@nestjs/swagger": "^6.2.1",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.3",
+    "express-basic-auth": "^1.2.1",
     "mongoose": "^6.9.1",
     "passport": "^0.6.0",
     "passport-google-oauth20": "^2.0.0",
