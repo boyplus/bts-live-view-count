@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from '@/axios'
+import api from '@/api'
 
 interface User {
   email: string;
@@ -10,7 +10,7 @@ const Profile: React.FC = () => {
   const [user, setUser] = useState<User>();
 
   const fetchProfile = async () => {
-    const res = await axios.get('/auth/profile')
+    const res = await api.get('/auth/profile')
     setUser(res.data)
   }
 
