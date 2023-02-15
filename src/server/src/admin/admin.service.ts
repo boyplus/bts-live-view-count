@@ -17,4 +17,9 @@ export class AdminService {
     const admin = await this.adminModel.findOne({ email });
     return admin;
   }
+
+  async findWaitingVerifiedAdmin(): Promise<Admin[]> {
+    const admins = await this.adminModel.find({ isVerified: false });
+    return admins;
+  }
 }
