@@ -7,6 +7,7 @@ const Home: React.FC = () => {
       <Link to="/">Home</Link>
       <Link to="/profile">Profile</Link>
       <h1>Home</h1>
+      <a href="/api/auth/google">Login here</a>
     </div>
   );
 }
