@@ -21,7 +21,7 @@ const Profile: React.FC = () => {
     <div>
       <Link to="/">Home</Link>
       <Link to="/profile">Profile</Link>
-      <h1>Profile</h1>
+      <h1>Profile Page</h1>
       <p>Hello, {user?.email}</p>
     </div>
   );
