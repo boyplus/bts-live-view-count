@@ -1,11 +1,19 @@
 import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { GoogleStrategy } from './google.strategy';
+import { GoogleStrategy } from './strategies/google.strategy';
 
-import { JwtModule } from '@nestjs/jwt';
-import { JwtStrategy } from './jwt.strategy';
+import { JwtStrategy } from './strategies/jwt.strategy';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+
+// Module
+import { MongooseModule } from '@nestjs/mongoose';
+import { JwtModule } from '@nestjs/jwt';
+
+// Schema
+import { Admin, AdminSchema } from '../schemas/admin.schema';
+import { AdminModule } from 'src/admin/admin.module';
+import { AdminService } from 'src/admin/admin.service';
 
 @Module({
   imports: [
@@ -19,8 +27,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         },
       }),
     }),
+    MongooseModule.forFeature([{ name: Admin.name, schema: AdminSchema }]),
+    AdminModule,
   ],
-  providers: [AuthService, GoogleStrategy, JwtStrategy],
+  providers: [AuthService, GoogleStrategy, JwtStrategy, AdminService],
   controllers: [AuthController],
 })
 export class AuthModule {}
