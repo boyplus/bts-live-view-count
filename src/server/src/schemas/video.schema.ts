@@ -3,6 +3,12 @@ import { Document } from 'mongoose';
 
 export type VideoDocument = Video & Document;
 
+export interface Thumbnail {
+  url: string;
+  width: number;
+  height: number;
+}
+
 @Schema()
 export class Video {
   @Prop({ required: true })
@@ -18,7 +24,7 @@ export class Video {
   oldLike: number;
 
   @Prop({ required: true })
-  currentView: number;
+  thumbnails: Thumbnail[];
 
   @Prop({ required: true })
   currentLike: number;

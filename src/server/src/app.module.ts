@@ -13,6 +13,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AdminModule } from './admin/admin.module';
+import { VideoModule } from './video/video.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { AdminModule } from './admin/admin.module';
     }),
     AuthModule,
     AdminModule,
+    VideoModule,
   ],
   controllers: [AppController],
   providers: [AppService],
