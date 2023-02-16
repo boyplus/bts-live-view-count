@@ -1,26 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import api from '@/api'
 
-interface User {
-  email: string;
-}
-
-interface Admin {
-  id: string;
-  email: string;
-}
+import { adminApi, authApi } from '@/api';
+import { Admin } from '@/api/generated';
 
 const Profile: React.FC = () => {
-  const [user, setUser] = useState<User>();
-  const [admins, setAdmins] = useState<Admin[]>();
+  const [admin, setAdmin] = useState<Admin>();
+  const [unverifiedAdmins, setUnverifiedAdmins] = useState<Admin[]>([]);
 
   const fetchProfile = async () => {
-    const res = await api.get('/auth/profile')
-    setUser(res.data)
+    const res = await authApi.profile();
+    setAdmin(res.data)
 
-    const test = await api.get('/admin/waiting-verify')
-    console.log(test.data)
+    const x = await adminApi.getWaitingVerification();
+    setUnverifiedAdmins(x.data);
   }
 
   useEffect(() => {
@@ -31,7 +24,8 @@ const Profile: React.FC = () => {
       <Link to="/">Home</Link>
       <Link to="/profile">Profile</Link>
       <h1>Profile Page</h1>
-      <p>Hello, {user?.email}</p>
+      <p>Hello, {admin?.email}</p>
+
     </div>
   );
 }

@@ -1,10 +1,13 @@
 import { Controller, Get, Req, Res, UseGuards } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { AdminService } from 'src/admin/admin.service';
+import { Admin } from 'src/admin/entity/admin.entity';
 import { AuthService } from './auth.service';
 import { GoogleOauthGuard } from './guards/google-oauth.guard';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -52,8 +55,9 @@ export class AuthController {
 
   @UseGuards(JwtAuthGuard)
   @Get('profile')
-  profile(@Req() req) {
-    const { email } = req.user;
-    return { email };
+  @ApiOkResponse({ type: Admin })
+  profile(@Req() req): Admin {
+    const { email, firstname, lastname, picture } = req.user;
+    return { email, firstname, lastname, picture };
   }
 }

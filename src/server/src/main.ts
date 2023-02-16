@@ -9,15 +9,15 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
   app.use(cookieParser());
 
-  app.use(
-    ['/api/docs', '/api/docs-json'],
-    basicAuth({
-      challenge: true,
-      users: {
-        [process.env.SWAGGER_USER]: process.env.SWAGGER_PASSWORD,
-      },
-    }),
-  );
+  // app.use(
+  //   ['/api/docs', '/api/docs-json'],
+  //   basicAuth({
+  //     challenge: true,
+  //     users: {
+  //       [process.env.SWAGGER_USER]: process.env.SWAGGER_PASSWORD,
+  //     },
+  //   }),
+  // );
 
   // OpenAPI
   const config = new DocumentBuilder()
