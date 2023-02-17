@@ -1,15 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { Thumbnails } from './thumbnail.schema';
 
 export type VideoDocument = Video & Document;
 
-export interface Thumbnail {
-  url: string;
-  width: number;
-  height: number;
-}
-
-@Schema()
+@Schema({ timestamps: true })
 export class Video {
   @Prop({ required: true })
   videoId: string;
@@ -24,13 +19,13 @@ export class Video {
   oldLike: number;
 
   @Prop({ required: true })
-  thumbnails: Thumbnail[];
+  currentView: number;
 
   @Prop({ required: true })
   currentLike: number;
 
   @Prop({ required: true })
-  createdAt: Date;
+  thumbnails: Thumbnails;
 }
 
 export const VideoSchema = SchemaFactory.createForClass(Video);
