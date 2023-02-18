@@ -5,9 +5,23 @@
   padding: 20px 0;
 }
 
+@media only screen and (max-width: 850px) {
+  .videos-container{
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .videos-container{
+    grid-template-columns: 1fr;
+  }
+}
+
 .video-card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
+  margin-bottom: 10px;
 }
 
 .video-card:hover{

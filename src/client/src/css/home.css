@@ -3,3 +3,10 @@
   flex-direction: column;
   padding: 2rem 12%;
 }
+
+
+@media only screen and (max-width: 1100px) {
+  .home-container{
+    padding: 2rem 30px;
+  }
+}

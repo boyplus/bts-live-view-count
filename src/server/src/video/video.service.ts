@@ -34,7 +34,7 @@ export class VideoService {
   }
 
   async getVideos() {
-    const videos = await this.videoModel.find();
+    const videos = await this.videoModel.find().sort({ currentView: 'desc' });
     return videos;
   }
 
