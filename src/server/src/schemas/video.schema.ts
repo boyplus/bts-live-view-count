@@ -4,19 +4,19 @@ import { Thumbnails } from './thumbnail.schema';
 
 export type VideoDocument = Video & Document;
 
-@Schema({ timestamps: true })
+@Schema({
+  timeseries: {
+    timeField: 'timestamp',
+    metaField: 'test',
+    granularity: 'minutes',
+  },
+})
 export class Video {
-  @Prop({ required: true })
+  @Prop({ required: true, index: true })
   videoId: string;
 
   @Prop({ required: true })
   title: string;
-
-  @Prop({ required: true })
-  oldView: number;
-
-  @Prop({ required: true })
-  oldLike: number;
 
   @Prop({ required: true })
   currentView: number;
@@ -26,6 +26,9 @@ export class Video {
 
   @Prop({ required: true })
   thumbnails: Thumbnails;
+
+  @Prop({ required: true })
+  timeStamp: Date;
 }
 
 export const VideoSchema = SchemaFactory.createForClass(Video);

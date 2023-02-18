@@ -1,35 +1,41 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Video, VideoDocument } from 'src/schemas/video.schema';
+import { HydrateVideoService } from './hydrate-video.service';
 
-import youtubeApi from '../youtube';
-import { VideoDetailResponse } from './model/video-detail-response';
+import { YoutubeApiService } from './youtube-api.service';
 
 @Injectable()
 export class VideoService {
   constructor(
     @InjectModel(Video.name) private readonly videoModel: Model<VideoDocument>,
-    private readonly configService: ConfigService,
-  ) {
-    const apiKey = this.configService.get<string>('YOUTUBE_API_KEY');
-    youtubeApi.defaults.params['key'] = apiKey;
-  }
+    private readonly youtubeApiService: YoutubeApiService,
+    private readonly hydrateService: HydrateVideoService,
+  ) {}
 
-  async addVideo(videoId: string) {
+  async addVideo(videoId: string, customTitle: string) {
     // Check whether the video already exist in database
     const existingVideo = await this.findByVideoId(videoId);
     if (existingVideo) {
-      throw new BadRequestException('Vide already exists');
+      throw new BadRequestException('Video already exists');
     }
 
-    const videoDetail = await this.getVideoDetail(videoId);
-    const video = this.hydrateVideoDetail(videoDetail);
+    const video = await this.getVideoDetail(videoId);
     if (!video) throw new NotFoundException('Video not found');
+
+    // Mutate the title if custom title is present
+    if (customTitle !== undefined) {
+      video.title = customTitle;
+    }
 
     const newVideo = await new this.videoModel(video);
     await newVideo.save();
+  }
+
+  async getVideos() {
+    const videos = await this.videoModel.find();
+    return videos;
   }
 
   async findByVideoId(videoId: string): Promise<Video> {
@@ -37,29 +43,27 @@ export class VideoService {
     return video;
   }
 
-  async getVideoDetail(youtubeId: string): Promise<VideoDetailResponse> {
-    const res = await youtubeApi.get('/videos', {
-      params: { id: youtubeId },
-    });
-    return res.data;
+  async getVideoDetail(youtubeId: string): Promise<Video> {
+    const videoDetail = await this.youtubeApiService.getVideoDetail(youtubeId);
+    const video = this.hydrateService.hydrateVideoDetail(videoDetail);
+    return video;
   }
 
-  private hydrateVideoDetail(videoDetailResponse: VideoDetailResponse): Video | undefined {
-    if (!videoDetailResponse.items.length) return undefined;
-    const video = videoDetailResponse.items[0];
+  async deleteVideo(videoId: string) {
+    // await this.videoModel.deleteOne({ videoId });
+  }
 
-    const thumbnails = video.snippet.thumbnails;
+  async getUniqueVideos(): Promise<Video[]> {
+    const videos = await this.videoModel.aggregate([{ $group: { _id: { videoId: '$videoId', title: '$title' } } }]);
+    return videos;
+  }
 
-    const videoDocument: Video = {
-      videoId: video.id,
-      title: video.snippet.title,
-      oldView: parseInt(video.statistics.viewCount),
-      oldLike: parseInt(video.statistics.likeCount),
-      currentView: parseInt(video.statistics.viewCount),
-      currentLike: parseInt(video.statistics.likeCount),
-      thumbnails,
-    };
+  ///////////////////////////////
+  // Update videos from youtube API
+  ///////////////////////////////
 
-    return videoDocument;
+  async updateVideosFromYoutubeApi() {
+    const videos = await this.getUniqueVideos();
+    console.log(videos);
   }
 }

@@ -17,15 +17,15 @@ export class Thumbnails {
   @Prop({ required: true })
   default: Thumbnail;
 
-  @Prop({ required: true })
+  @Prop()
   medium: Thumbnail;
 
-  @Prop({ required: true })
+  @Prop()
   high: Thumbnail;
 
-  @Prop({ required: true })
+  @Prop()
   standard: Thumbnail;
 
-  @Prop({ required: true })
+  @Prop()
   maxres: Thumbnail;
 }
