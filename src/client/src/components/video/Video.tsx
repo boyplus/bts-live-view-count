@@ -4,8 +4,9 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faEye, faComment } from '@fortawesome/free-solid-svg-icons'
 
-// CSS
+import CountUp from 'react-countup';
 
+// CSS
 import './video.css';
 
 type VideoProps = {
@@ -46,7 +47,7 @@ const Video: React.FC<VideoProps> = ({ id, title, currentView, currentLike, oldV
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <FontAwesomeIcon icon={faEye} />
           <h4 style={{ marginLeft: '8px' }}>
-            {renderNumber(currentView)}
+            <CountUp start={oldView} end={currentView} duration={300} separator="," />
           </h4>
         </div>
 
@@ -60,7 +61,7 @@ const Video: React.FC<VideoProps> = ({ id, title, currentView, currentLike, oldV
           <div>
             <FontAwesomeIcon icon={faThumbsUp} />
             <span style={{ marginLeft: '8px' }}>
-              {renderNumber(currentLike)}
+              <CountUp start={oldLike} end={currentLike} duration={300} separator="," />
             </span>
           </div>
 
