@@ -16,8 +16,10 @@ export class HydrateVideoService {
       title: video.snippet.title,
       currentView: parseInt(video.statistics.viewCount),
       currentLike: parseInt(video.statistics.likeCount),
+      currentComment: parseInt(video.statistics.commentCount),
       oldView: parseInt(video.statistics.viewCount),
       oldLike: parseInt(video.statistics.likeCount),
+      oldComment: parseInt(video.statistics.commentCount),
       thumbnails,
     };
 
@@ -32,6 +34,7 @@ export class HydrateVideoService {
         videoId: video.id,
         currentView: parseInt(video.statistics.viewCount),
         currentLike: parseInt(video.statistics.likeCount),
+        currentComment: parseInt(video.statistics.commentCount),
         timeStamp,
       };
     });

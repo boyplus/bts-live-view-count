@@ -66,9 +66,11 @@ export class VideoService {
       statistics.map(async (stat, index) => {
         videos[index].oldView = videos[index].currentView;
         videos[index].oldLike = videos[index].currentLike;
+        videos[index].oldComment = videos[index].currentComment;
 
         videos[index].currentView = stat.currentView;
         videos[index].currentLike = stat.currentLike;
+        videos[index].currentComment = stat.currentComment;
         return await videos[index].save();
       }),
     );

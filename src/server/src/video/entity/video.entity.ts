@@ -42,10 +42,16 @@ export class Video {
   currentLike: number;
 
   @ApiProperty()
+  currentComment: number;
+
+  @ApiProperty()
   oldView: number;
 
   @ApiProperty()
   oldLike: number;
+
+  @ApiProperty()
+  oldComment: number;
 
   @ApiProperty({ type: Thumbnails })
   thumbnails: Thumbnails;

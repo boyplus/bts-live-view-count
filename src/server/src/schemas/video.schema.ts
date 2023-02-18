@@ -19,10 +19,16 @@ export class Video {
   currentLike: number;
 
   @Prop({ required: true })
+  currentComment: number;
+
+  @Prop({ required: true })
   oldView: number;
 
   @Prop({ required: true })
   oldLike: number;
+
+  @Prop({ required: true })
+  oldComment: number;
 
   @Prop({ required: true })
   thumbnails: Thumbnails;

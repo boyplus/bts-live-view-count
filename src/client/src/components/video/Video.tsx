@@ -14,20 +14,17 @@ type VideoProps = {
   title: string;
   currentView: number;
   currentLike: number;
+  currentComment: number;
   oldView: number;
   oldLike: number;
+  oldComment: number;
   thumbnail: string;
 }
 
-const Video: React.FC<VideoProps> = ({ id, title, currentView, currentLike, oldView, oldLike, thumbnail }) => {
+const Video: React.FC<VideoProps> = ({ id, title, currentView, currentLike, currentComment, oldView, oldLike, oldComment, thumbnail }) => {
   const getURL = () => {
     return `https://www.youtube.com/watch?v=${id}`;
   }
-
-  const renderNumber = (x: number) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  }
-
 
   return (
     <div className='video-card'>
@@ -40,9 +37,8 @@ const Video: React.FC<VideoProps> = ({ id, title, currentView, currentLike, oldV
       </a>
 
       <div className='content-container'>
-        <div className='title'>
-          <h4>{title}</h4>
-        </div>
+
+        <h4 className='title'>{title}</h4>
 
         <div className='view'>
           <FontAwesomeIcon icon={faEye} />
@@ -62,7 +58,7 @@ const Video: React.FC<VideoProps> = ({ id, title, currentView, currentLike, oldV
           <div>
             <FontAwesomeIcon icon={faComment} />
             <span className='value'>
-
+              <CountUp start={oldComment} end={currentComment} duration={300} separator="," />
             </span>
           </div>
         </div>
