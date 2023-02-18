@@ -22,3 +22,26 @@
   height: auto;
   background-color: #e2e2e2;
 }
+
+.title{
+  min-height: 55px;
+}
+
+.content-container{
+  padding: 10px;
+}
+
+.view {
+  display: flex;
+  align-items: center;
+}
+
+.value {
+  margin-left: 8px;
+}
+
+.bottom-content-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+}

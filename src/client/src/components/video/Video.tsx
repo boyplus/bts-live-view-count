@@ -39,35 +39,29 @@ const Video: React.FC<VideoProps> = ({ id, title, currentView, currentLike, oldV
         <img src={thumbnail} className='center-cropped'></img>
       </a>
 
-      <div style={{ padding: '10px' }}>
-        <div style={{ minHeight: '55px' }}>
+      <div className='content-container'>
+        <div className='title'>
           <h4>{title}</h4>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div className='view'>
           <FontAwesomeIcon icon={faEye} />
-          <h4 style={{ marginLeft: '8px' }}>
+          <h4 className='value'>
             <CountUp start={oldView} end={currentView} duration={300} separator="," />
           </h4>
         </div>
 
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            marginTop: '5px',
-          }}
-        >
+        <div className='bottom-content-container'>
           <div>
             <FontAwesomeIcon icon={faThumbsUp} />
-            <span style={{ marginLeft: '8px' }}>
+            <span className='value'>
               <CountUp start={oldLike} end={currentLike} duration={300} separator="," />
             </span>
           </div>
 
           <div>
             <FontAwesomeIcon icon={faComment} />
-            <span style={{ marginLeft: '8px' }}>
+            <span className='value'>
 
             </span>
           </div>
