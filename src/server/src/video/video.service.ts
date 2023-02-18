@@ -50,12 +50,7 @@ export class VideoService {
   }
 
   async deleteVideo(videoId: string) {
-    // await this.videoModel.deleteOne({ videoId });
-  }
-
-  async getUniqueVideos(): Promise<Video[]> {
-    const videos = await this.videoModel.aggregate([{ $group: { _id: { videoId: '$videoId', title: '$title' } } }]);
-    return videos;
+    await this.videoModel.deleteOne({ videoId });
   }
 
   ///////////////////////////////
@@ -63,7 +58,19 @@ export class VideoService {
   ///////////////////////////////
 
   async updateVideosFromYoutubeApi() {
-    const videos = await this.getUniqueVideos();
-    console.log(videos);
+    const videos = await this.getVideos();
+    const ids = videos.map((video) => video.videoId);
+    const statisticsResponse = await this.youtubeApiService.getVideosStatistics(ids);
+    const statistics = this.hydrateService.hydrateVideosStatistics(statisticsResponse);
+    const newVideos = await Promise.all(
+      statistics.map(async (stat, index) => {
+        videos[index].oldView = videos[index].currentView;
+        videos[index].oldLike = videos[index].currentLike;
+
+        videos[index].currentView = stat.currentView;
+        videos[index].currentLike = stat.currentLike;
+        return await videos[index].save();
+      }),
+    );
   }
 }

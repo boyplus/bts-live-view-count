@@ -1,11 +1,16 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { Thumbnails } from './thumbnail.schema';
 
-export type VideoDocument = Video & Document;
+export type StatisticDocument = Statistic & Document;
 
-@Schema({ timestamps: true })
-export class Video {
+@Schema({
+  timeseries: {
+    timeField: 'timestamp',
+    metaField: 'videoId',
+    granularity: 'minutes',
+  },
+})
+export class Statistic {
   @Prop({ required: true, index: true })
   videoId: string;
 
@@ -19,13 +24,7 @@ export class Video {
   currentLike: number;
 
   @Prop({ required: true })
-  oldView: number;
-
-  @Prop({ required: true })
-  oldLike: number;
-
-  @Prop({ required: true })
-  thumbnails: Thumbnails;
+  timeStamp: Date;
 }
 
-export const VideoSchema = SchemaFactory.createForClass(Video);
+export const StatisticSchema = SchemaFactory.createForClass(Statistic);

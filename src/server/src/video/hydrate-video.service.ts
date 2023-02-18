@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Video } from 'src/schemas/video.schema';
 import { VideoDetailResponse } from './model/video-detail-response';
+import { VideoStatistics } from './model/video-stat';
 
 @Injectable()
 export class HydrateVideoService {
@@ -12,13 +13,29 @@ export class HydrateVideoService {
 
     const videoDocument: Video = {
       videoId: video.id,
-      timeStamp: new Date(),
       title: video.snippet.title,
       currentView: parseInt(video.statistics.viewCount),
       currentLike: parseInt(video.statistics.likeCount),
+      oldView: parseInt(video.statistics.viewCount),
+      oldLike: parseInt(video.statistics.likeCount),
       thumbnails,
     };
 
     return videoDocument;
+  }
+
+  hydrateVideosStatistics(videoDetailResponse: VideoDetailResponse): VideoStatistics[] {
+    const videos = videoDetailResponse.items;
+    const timeStamp = new Date();
+    const statistics = videos.map((video) => {
+      return {
+        videoId: video.id,
+        currentView: parseInt(video.statistics.viewCount),
+        currentLike: parseInt(video.statistics.likeCount),
+        timeStamp,
+      };
+    });
+
+    return statistics;
   }
 }

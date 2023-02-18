@@ -34,7 +34,7 @@ export class VideoController {
   @Delete(':id')
   @Auth()
   async deleteVideo(@Param('id') id: string) {
-    // await this.videoService.deleteVideo(id);
+    await this.videoService.deleteVideo(id);
   }
 
   @Patch()

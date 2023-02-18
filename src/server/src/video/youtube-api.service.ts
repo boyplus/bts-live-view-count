@@ -18,10 +18,10 @@ export class YoutubeApiService {
     return res.data;
   }
 
-  async getVideosDetail(youtubeIds: string[]): Promise<VideoDetailResponse[]> {
+  async getVideosStatistics(youtubeIds: string[]): Promise<VideoDetailResponse> {
     const ids = youtubeIds.join();
     const res = await youtubeApi.get('/videos', {
-      params: { id: ids },
+      params: { id: ids, part: 'statistics' },
     });
     return res.data;
   }
