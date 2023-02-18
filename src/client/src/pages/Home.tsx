@@ -13,7 +13,8 @@ import '../css/home.css';
 import Header from '@/components/header/Header';
 
 const Home: React.FC = () => {
-  const { data: videos = [], isLoading, error } = useFetch<Video[]>(() => videoApi.getVideos());
+  const { data: videos = [], isLoading, error } = useFetch<Video[]>(() => videoApi.getVideos(), 300000);
+
 
   const [sortBy, setSortBy] = useState<string>('view')
 

@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 const useFetch = <T>(
-  fetch: (options?: AxiosRequestConfig) => Promise<AxiosResponse<T, any>>
+  fetch: (options?: AxiosRequestConfig) => Promise<AxiosResponse<T, any>>,
+  intervalNum?: number
 ): {
   data: T | undefined;
   status: number | undefined;
@@ -32,6 +33,14 @@ const useFetch = <T>(
 
   useEffect(() => {
     fetchData();
+    if (intervalNum) {
+      const interval = setInterval(() => {
+        fetchData();
+      }, intervalNum);
+      return () => {
+        clearInterval(interval);
+      };
+    }
   }, []);
 
   return { data, error, status, isLoading };
