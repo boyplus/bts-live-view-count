@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { AxiosInstance } from 'axios';
 
-import { AdminApi, AuthApi } from './generated';
+import { AdminApi, AuthApi, VideoApi } from './generated/api';
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: '/api',
@@ -10,5 +10,6 @@ const axiosInstance: AxiosInstance = axios.create({
 
 export const adminApi = new AdminApi(undefined, '');
 export const authApi = new AuthApi(undefined, '');
+export const videoApi = new VideoApi(undefined, '');
 
 export default axiosInstance;

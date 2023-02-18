@@ -1,9 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { Auth } from 'src/decorators/auth.decorator';
-import { Video } from 'src/schemas/video.schema';
 import { AddVideoRequest } from './dto/add-video-request.dto';
 import { VideoService } from './video.service';
+
+import { Video } from './entity/video.entity';
 
 @ApiTags('video')
 @Controller('video')

@@ -1,12 +1,24 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import Videos from '@/components/video/Videos';
+
+// API and Model
+import { Video } from '@/api/generated';
+import { videoApi } from '@/api';
+
+// Hooks
+import useFetch from '@/hooks/useFetch';
+
+// CSS
+import '../css/home.css';
 
 const Home: React.FC = () => {
-  return (
-    <div>
-      <h1>BTS live view count</h1>
+  const { data: videos = [], isLoading, error } = useFetch<Video[]>(() => videoApi.getVideos());
 
-    </div>
+  return (
+    <main className="home-container">
+      <h1>BTS live view count</h1>
+      <Videos videos={videos} />
+    </main>
   );
 }
 
