@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Video, VideoDocument } from 'src/schemas/video.schema';
 import { HydrateVideoService } from './hydrate-video.service';
+import { StatisticService } from './statistic.service';
 
 import { YoutubeApiService } from './youtube-api.service';
 
@@ -11,6 +12,7 @@ export class VideoService {
   constructor(
     @InjectModel(Video.name) private readonly videoModel: Model<VideoDocument>,
     private readonly youtubeApiService: YoutubeApiService,
+    private readonly statisticService: StatisticService,
     private readonly hydrateService: HydrateVideoService,
   ) {}
 
@@ -62,6 +64,9 @@ export class VideoService {
     const ids = videos.map((video) => video.videoId);
     const statisticsResponse = await this.youtubeApiService.getVideosStatistics(ids);
     const statistics = this.hydrateService.hydrateVideosStatistics(statisticsResponse);
+
+    await this.statisticService.addStatistics(statistics);
+
     const newVideos = await Promise.all(
       statistics.map(async (stat, index) => {
         videos[index].oldView = videos[index].currentView;

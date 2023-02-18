@@ -3,5 +3,5 @@ export interface VideoStatistics {
   currentView: number;
   currentLike: number;
   currentComment: number;
-  timeStamp: Date;
+  timestamp: Date;
 }

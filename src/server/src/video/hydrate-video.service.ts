@@ -28,14 +28,14 @@ export class HydrateVideoService {
 
   hydrateVideosStatistics(videoDetailResponse: VideoDetailResponse): VideoStatistics[] {
     const videos = videoDetailResponse.items;
-    const timeStamp = new Date();
+    const timestamp = new Date();
     const statistics = videos.map((video) => {
       return {
         videoId: video.id,
         currentView: parseInt(video.statistics.viewCount),
         currentLike: parseInt(video.statistics.likeCount),
         currentComment: parseInt(video.statistics.commentCount),
-        timeStamp,
+        timestamp,
       };
     });
 

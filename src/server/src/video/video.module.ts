@@ -3,7 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 // Schemas
 import { Video, VideoSchema } from 'src/schemas/video.schema';
-import { Statistic, StatisticSchema } from 'src/schemas/statistic';
+import { Statistic, StatisticSchema } from 'src/schemas/statistic.schema';
 
 // Services
 import { VideoService } from './video.service';
