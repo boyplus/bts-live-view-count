@@ -1,25 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+
+// Components
 import Videos from '@/components/video/Videos';
+import Header from '@/components/header/Header';
 
 // API and Model
 import { Video } from '@/api/generated';
 import { videoApi } from '@/api';
+import { SortVideoBy } from '@/api/non-generated/model';
 
 // Hooks
 import useFetch from '@/hooks/useFetch';
 
 // CSS
 import '../css/home.css';
-import Header from '@/components/header/Header';
-import { SortVideoBy } from '@/api/non-generated/model';
-
-
 
 const Home: React.FC = () => {
-  const { data: videos = [], isLoading, error } = useFetch<Video[]>(() => videoApi.getVideos(sortBy), 300000);
-
-
   const [sortBy, setSortBy] = useState<SortVideoBy>(SortVideoBy.View)
+  const { data: videos = [], isLoading, error } = useFetch<Video[]>(() => videoApi.getVideos(sortBy), 300000, [sortBy]);
+  console.log('rerender', sortBy);
 
   return (
     <main className="home-container">

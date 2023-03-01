@@ -13,7 +13,7 @@ const skeletonVideos = Array(10).fill(0);
 
 const Videos: React.FC<VideoProps> = ({ videos, isLoading }) => {
   const renderVideos = () => {
-    return isLoading ? skeletonVideos.map(_ => <VideoSkeleton />) :
+    return isLoading ? skeletonVideos.map((_, index) => <VideoSkeleton key={index} />) :
       videos.map(({ videoId, title, currentView, currentLike, currentComment, oldView, oldLike, oldComment, thumbnails }) => (
         <VideoComponent
           key={videoId}

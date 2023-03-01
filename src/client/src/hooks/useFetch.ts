@@ -1,9 +1,14 @@
 import { useEffect, useState } from 'react';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
+function delay(t: number) {
+  return new Promise((resolve) => setTimeout(resolve, t));
+}
+
 const useFetch = <T>(
   fetch: (options?: AxiosRequestConfig) => Promise<AxiosResponse<T, any>>,
-  intervalNum?: number
+  intervalNum?: number,
+  dependencies?: Array<any>
 ): {
   data: T | undefined;
   status: number | undefined;
@@ -18,8 +23,8 @@ const useFetch = <T>(
   const fetchData = async () => {
     try {
       setIsLoading(true);
+      const [_, res] = await Promise.all([delay(500), fetch()]);
 
-      const res = await fetch();
       setData(res.data);
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
@@ -41,7 +46,7 @@ const useFetch = <T>(
         clearInterval(interval);
       };
     }
-  }, []);
+  }, dependencies ?? []);
 
   return { data, error, status, isLoading };
 };

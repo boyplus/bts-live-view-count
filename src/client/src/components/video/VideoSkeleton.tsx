@@ -14,9 +14,9 @@ const VideoSkeleton: React.FC = () => {
       <div className='skeleton-video-thumbnail' />
 
       <div className='content-container'>
-        <h4 className='title'>
+        <div className='title'>
           <h4 className='fake'>____________</h4>
-        </h4>
+        </div>
 
 
         <div className='view'>
