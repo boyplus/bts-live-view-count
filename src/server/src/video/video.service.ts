@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Video, VideoDocument } from 'src/schemas/video.schema';
 import { HydrateVideoService } from './hydrate-video.service';
+import { SortVideoBy } from './model/sort-video-by';
 import { StatisticService } from './statistic.service';
 
 import { YoutubeApiService } from './youtube-api.service';
@@ -35,8 +36,10 @@ export class VideoService {
     await newVideo.save();
   }
 
-  async getVideos() {
-    const videos = await this.videoModel.find().sort({ currentView: 'desc' });
+  async getVideos(sortBy?: SortVideoBy) {
+    let sortByObject = this.mappingSortBy(sortBy);
+
+    const videos = await this.videoModel.find().sort(sortByObject);
     return videos;
   }
 
@@ -79,5 +82,26 @@ export class VideoService {
         return await videos[index].save();
       }),
     );
+  }
+
+  ///////////////////////////////
+  // Utils methods
+  ///////////////////////////////
+
+  mappingSortBy(sortBy: SortVideoBy): any {
+    switch (sortBy) {
+      case SortVideoBy.View:
+        return { currentView: 'desc' };
+      case SortVideoBy.Like:
+        return { currentLike: 'desc' };
+      case SortVideoBy.Comment:
+        return { currentComment: 'desc' };
+      case SortVideoBy.Newest:
+        return { currentView: 'asc' };
+      case SortVideoBy.Oldest:
+        return { currentView: 'desc' };
+      default:
+        return { currentView: 'desc' };
+    }
   }
 }
