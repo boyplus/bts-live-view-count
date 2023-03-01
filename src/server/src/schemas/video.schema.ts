@@ -13,6 +13,9 @@ export class Video {
   title: string;
 
   @Prop({ required: true })
+  publishedAt: Date;
+
+  @Prop({ required: true })
   currentView: number;
 
   @Prop({ required: true })

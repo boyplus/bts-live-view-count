@@ -14,6 +14,7 @@ export class HydrateVideoService {
     const videoDocument: Video = {
       videoId: video.id,
       title: video.snippet.title,
+      publishedAt: video.snippet.publishedAt,
       currentView: parseInt(video.statistics.viewCount),
       currentLike: parseInt(video.statistics.likeCount),
       currentComment: parseInt(video.statistics.commentCount),

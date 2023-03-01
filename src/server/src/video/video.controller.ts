@@ -26,6 +26,12 @@ export class VideoController {
     return videos;
   }
 
+  @Patch('published-at')
+  @Auth()
+  async addPublishedAt() {
+    await this.videoService.addPublishedAt();
+  }
+
   @Get('preview/:id')
   @Auth()
   @ApiOkResponse({ type: Video })

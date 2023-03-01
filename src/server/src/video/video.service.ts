@@ -58,6 +58,19 @@ export class VideoService {
     await this.videoModel.deleteOne({ videoId });
   }
 
+  async addPublishedAt() {
+    const videos = await this.getVideos();
+    const ids = videos.map((video) => video.videoId);
+    await Promise.all(
+      ids.map(async (id, index) => {
+        const videoDetail = await this.getVideoDetail(id);
+        const { publishedAt } = videoDetail;
+        videos[index].publishedAt = publishedAt;
+        return await videos[index].save();
+      }),
+    );
+  }
+
   ///////////////////////////////
   // Update videos from youtube API
   ///////////////////////////////
