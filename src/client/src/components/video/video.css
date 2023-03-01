@@ -5,26 +5,8 @@
   padding: 20px 0;
 }
 
-.fade-in {
-  animation: fadeIn ease 5s;
-  -webkit-animation: fadeIn ease 5s;
-  -moz-animation: fadeIn ease 5s;
-  -o-animation: fadeIn ease 5s;
-  -ms-animation: fadeIn ease 5s;
-}
-
-
-@keyframes fadeIn{
-  0% {
-    opacity:0;
-  }
-  100% {
-    opacity:1;
-  }
-}
-
 .skeleton-video-thumbnail {
-  width: 358px;
+  width: 100%;
   height: 260px;
   background-color: #e2e2e2;
 }
@@ -51,6 +33,7 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   margin-bottom: 10px;
+  width: 100%;
 }
 
 .video-card:hover{
