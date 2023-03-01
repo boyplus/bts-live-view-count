@@ -33,7 +33,12 @@ const Video: React.FC<VideoProps> = ({ id, title, currentView, currentLike, curr
         rel="noopener noreferrer"
         href={getURL()}
       >
-        <img src={thumbnail} className='center-cropped'></img>
+        <img
+          src={thumbnail}
+          className='center-cropped'
+          width="358px"
+          height="260px"
+        />
       </a>
 
       <div className='content-container'>
