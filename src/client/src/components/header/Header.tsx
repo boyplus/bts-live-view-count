@@ -1,10 +1,11 @@
+import { SortVideoBy } from '@/api/non-generated/model';
 import React from 'react';
 
 import './header.css'
 
 type HeaderProps = {
   sortBy: string;
-  setSortBy: (sortBy: string) => void;
+  setSortBy: (sortBy: SortVideoBy) => void;
 }
 
 const Header: React.FC<HeaderProps> = ({ sortBy, setSortBy }) => {
@@ -21,10 +22,10 @@ const Header: React.FC<HeaderProps> = ({ sortBy, setSortBy }) => {
 
   const renderSortBy = () => {
     const links = [
-      { text: 'Most view', name: 'view' },
-      { text: 'Most like', name: 'like' },
-      { text: 'Date added (oldest)', name: 'oldest' },
-      { text: 'Date added (newest)', name: 'newest' },
+      { text: 'Most view', name: SortVideoBy.View },
+      { text: 'Most like', name: SortVideoBy.Like },
+      { text: 'Date added (oldest)', name: SortVideoBy.Oldest },
+      { text: 'Date added (newest)', name: SortVideoBy.Newest },
     ];
     return links.map(({ text, name }) => {
       return (

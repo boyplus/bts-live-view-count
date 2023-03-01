@@ -11,12 +11,15 @@ import useFetch from '@/hooks/useFetch';
 // CSS
 import '../css/home.css';
 import Header from '@/components/header/Header';
+import { SortVideoBy } from '@/api/non-generated/model';
+
+
 
 const Home: React.FC = () => {
-  const { data: videos = [], isLoading, error } = useFetch<Video[]>(() => videoApi.getVideos(), 300000);
+  const { data: videos = [], isLoading, error } = useFetch<Video[]>(() => videoApi.getVideos(sortBy), 300000);
 
 
-  const [sortBy, setSortBy] = useState<string>('view')
+  const [sortBy, setSortBy] = useState<SortVideoBy>(SortVideoBy.View)
 
   return (
     <main className="home-container">

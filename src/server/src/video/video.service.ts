@@ -110,9 +110,9 @@ export class VideoService {
       case SortVideoBy.Comment:
         return { currentComment: 'desc' };
       case SortVideoBy.Newest:
-        return { currentView: 'asc' };
+        return { publishedAt: 'desc' };
       case SortVideoBy.Oldest:
-        return { currentView: 'desc' };
+        return { publishedAt: 'asc' };
       default:
         return { currentView: 'desc' };
     }

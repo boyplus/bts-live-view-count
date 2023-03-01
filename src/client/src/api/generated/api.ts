@@ -599,6 +599,35 @@ export const VideoApiAxiosParamCreator = function (configuration?: Configuration
     return {
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addPublishedAt: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/video/published-at`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {AddVideoRequest} addVideoRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -700,10 +729,13 @@ export const VideoApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
+         * @param {'View' | 'Like' | 'Comment' | 'Newest' | 'Oldest'} sortBy 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getVideos: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getVideos: async (sortBy: 'View' | 'Like' | 'Comment' | 'Newest' | 'Oldest', options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'sortBy' is not null or undefined
+            assertParamExists('getVideos', 'sortBy', sortBy)
             const localVarPath = `/api/video`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -715,6 +747,10 @@ export const VideoApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (sortBy !== undefined) {
+                localVarQueryParameter['sortBy'] = sortBy;
+            }
 
 
     
@@ -768,6 +804,15 @@ export const VideoApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async addPublishedAt(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addPublishedAt(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @param {AddVideoRequest} addVideoRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -798,11 +843,12 @@ export const VideoApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {'View' | 'Like' | 'Comment' | 'Newest' | 'Oldest'} sortBy 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getVideos(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Video>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getVideos(options);
+        async getVideos(sortBy: 'View' | 'Like' | 'Comment' | 'Newest' | 'Oldest', options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Video>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getVideos(sortBy, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -824,6 +870,14 @@ export const VideoApiFp = function(configuration?: Configuration) {
 export const VideoApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = VideoApiFp(configuration)
     return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        addPublishedAt(options?: any): AxiosPromise<void> {
+            return localVarFp.addPublishedAt(options).then((request) => request(axios, basePath));
+        },
         /**
          * 
          * @param {AddVideoRequest} addVideoRequest 
@@ -853,11 +907,12 @@ export const VideoApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
+         * @param {'View' | 'Like' | 'Comment' | 'Newest' | 'Oldest'} sortBy 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getVideos(options?: any): AxiosPromise<Array<Video>> {
-            return localVarFp.getVideos(options).then((request) => request(axios, basePath));
+        getVideos(sortBy: 'View' | 'Like' | 'Comment' | 'Newest' | 'Oldest', options?: any): AxiosPromise<Array<Video>> {
+            return localVarFp.getVideos(sortBy, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -877,6 +932,16 @@ export const VideoApiFactory = function (configuration?: Configuration, basePath
  * @extends {BaseAPI}
  */
 export class VideoApi extends BaseAPI {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof VideoApi
+     */
+    public addPublishedAt(options?: AxiosRequestConfig) {
+        return VideoApiFp(this.configuration).addPublishedAt(options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @param {AddVideoRequest} addVideoRequest 
@@ -912,12 +977,13 @@ export class VideoApi extends BaseAPI {
 
     /**
      * 
+     * @param {'View' | 'Like' | 'Comment' | 'Newest' | 'Oldest'} sortBy 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof VideoApi
      */
-    public getVideos(options?: AxiosRequestConfig) {
-        return VideoApiFp(this.configuration).getVideos(options).then((request) => request(this.axios, this.basePath));
+    public getVideos(sortBy: 'View' | 'Like' | 'Comment' | 'Newest' | 'Oldest', options?: AxiosRequestConfig) {
+        return VideoApiFp(this.configuration).getVideos(sortBy, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

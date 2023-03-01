@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
-import { ApiOkResponse, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { ApiOkResponse, ApiProperty, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { Auth } from 'src/decorators/auth.decorator';
 import { AddVideoRequest } from './dto/add-video-request.dto';
 import { VideoService } from './video.service';
@@ -21,6 +21,7 @@ export class VideoController {
   @Get()
   @ApiOkResponse({ type: Video, isArray: true })
   @ApiQuery({ name: 'sortBy', enum: SortVideoBy })
+  @ApiProperty({ enum: SortVideoBy, enumName: 'sortBy' })
   async getVideos(@Query('sortBy') sortBy: SortVideoBy): Promise<Video[]> {
     const videos = await this.videoService.getVideos(sortBy);
     return videos;
