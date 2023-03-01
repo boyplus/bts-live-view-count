@@ -5,6 +5,17 @@
   padding: 20px 0;
 }
 
+.skeleton-video-thumbnail {
+  width: 358px;
+  height: 260px;
+  background-color: #e2e2e2;
+}
+
+.fake {
+  background-color: #e2e2e2;
+  color: #e2e2e2;
+}
+
 @media only screen and (max-width: 850px) {
   .videos-container{
     grid-template-columns: 1fr 1fr;
@@ -52,6 +63,14 @@
 
 .value {
   margin-left: 8px;
+}
+
+.icon{
+  width: 18px;
+}
+
+.value-container{
+  display: flex;
 }
 
 .bottom-content-container {

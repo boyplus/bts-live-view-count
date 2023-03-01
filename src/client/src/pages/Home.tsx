@@ -21,7 +21,7 @@ const Home: React.FC = () => {
   return (
     <main className="home-container">
       <Header sortBy={sortBy} setSortBy={setSortBy}></Header>
-      <Videos videos={videos} />
+      <Videos videos={videos} isLoading={isLoading} />
     </main>
   );
 }
