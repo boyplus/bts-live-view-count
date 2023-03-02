@@ -1,10 +1,16 @@
-import { SortVideoBy } from '@/api/non-generated/model';
 import React from 'react';
 
+// Model
+import { SortVideoBy } from '@/api/non-generated/model';
+
+// Components
+import SortBy from './SortBy';
+
+// CSS
 import './header.css'
 
 type HeaderProps = {
-  sortBy: string;
+  sortBy: SortVideoBy;
   setSortBy: (sortBy: SortVideoBy) => void;
 }
 
@@ -13,41 +19,19 @@ const Header: React.FC<HeaderProps> = ({ sortBy, setSortBy }) => {
     document.getElementById('app-side-nav')!.style.right = '0px';
   }
   const closeNav = () => {
-    document.getElementById('app-side-nav')!.style.right = '-300px';
+    document.getElementById('app-side-nav')!.style.right = '-250px';
   }
 
-  const getClass = (name: string) => {
-    return name === sortBy ? 'bold' : 'link';
-  }
-
-  const renderSortBy = () => {
-    const links = [
-      { text: 'Most view', name: SortVideoBy.View },
-      { text: 'Most like', name: SortVideoBy.Like },
-      { text: 'Date added (oldest)', name: SortVideoBy.Oldest },
-      { text: 'Date added (newest)', name: SortVideoBy.Newest },
-    ];
-    return links.map(({ text, name }) => {
-      return (
-        <li
-          className={getClass(name)}
-          key={name}
-          onClick={() => setSortBy(name)}
-          style={{ marginLeft: '35px' }}
-        >
-          {text}
-        </li>
-      );
-    });
-  }
   return (
     <div>
       <div id="app-side-nav" className="sidenav">
         <span className="closebtn" onClick={closeNav}>
           &times;
         </span>
-        <span className="text-menu">Sort by</span>
-        <ul>{renderSortBy()}</ul>
+        <h4 className="text-menu">Sort by</h4>
+        <SortBy sortBy={sortBy} setSortBy={setSortBy} />
+
+
       </div>
       <div id="header">
         <h1 className="text-header">BTS live view count</h1>
