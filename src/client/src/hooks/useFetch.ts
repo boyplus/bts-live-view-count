@@ -17,7 +17,6 @@ export interface FetchResult<T> {
   status: number | undefined;
   error: any;
   isLoading: boolean;
-  isFirstTime: boolean;
 }
 
 const useFetch = <T>(
@@ -28,7 +27,6 @@ const useFetch = <T>(
   const [error, setError] = useState<any>();
   const [status, setStatus] = useState<number>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isFirstTime, setIsFirstTime] = useState<boolean>(true);
 
   const fetchData = async () => {
     try {
@@ -39,7 +37,6 @@ const useFetch = <T>(
       ]);
 
       setData(res.data);
-      setIsFirstTime(false);
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
         setStatus(error.status);
@@ -55,6 +52,7 @@ const useFetch = <T>(
     if (options?.intervalNum) {
       const interval = setInterval(() => {
         fetchData();
+        setIsLoading(false);
       }, options.intervalNum);
       return () => {
         clearInterval(interval);
@@ -62,7 +60,7 @@ const useFetch = <T>(
     }
   }, options?.dependencies ?? []);
 
-  return { data, error, status, isLoading, isFirstTime };
+  return { data, error, status, isLoading };
 };
 
 export default useFetch;

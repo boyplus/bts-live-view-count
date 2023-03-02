@@ -8,7 +8,7 @@ import { Admin } from '@/api/generated';
 import useFetch from '@/hooks/useFetch';
 
 // Components
-import Loader from '../loader';
+import Loader from '../loader/SquareLoader';
 
 // CSS
 import './layout.css';

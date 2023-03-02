@@ -7,12 +7,14 @@ import VideoSkeleton from './VideoSkeleton';
 type VideoProps = {
   videos: Video[];
   isLoading: boolean;
+  error: any;
 }
 
 const skeletonVideos = Array(10).fill(0);
 
-const Videos: React.FC<VideoProps> = ({ videos, isLoading }) => {
+const Videos: React.FC<VideoProps> = ({ videos, isLoading, error }) => {
   const renderVideos = () => {
+    if (error) { }
     return isLoading ? skeletonVideos.map((_, index) => <VideoSkeleton key={index} />) :
       videos.map(({ videoId, title, currentView, currentLike, currentComment, oldView, oldLike, oldComment, thumbnails }) => (
         <VideoComponent
