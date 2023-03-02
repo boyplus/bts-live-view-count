@@ -5,10 +5,15 @@ function delay(t: number) {
   return new Promise((resolve) => setTimeout(resolve, t));
 }
 
+export interface fetchOptions {
+  intervalNum?: number;
+  dependencies?: Array<any>;
+  isDelay?: boolean;
+}
+
 const useFetch = <T>(
   fetch: (options?: AxiosRequestConfig) => Promise<AxiosResponse<T, any>>,
-  intervalNum?: number,
-  dependencies?: Array<any>
+  options?: fetchOptions
 ): {
   data: T | undefined;
   status: number | undefined;
@@ -23,7 +28,10 @@ const useFetch = <T>(
   const fetchData = async () => {
     try {
       setIsLoading(true);
-      const [_, res] = await Promise.all([delay(500), fetch()]);
+      const [_, res] = await Promise.all([
+        options?.isDelay ? delay(500) : null,
+        fetch(),
+      ]);
 
       setData(res.data);
     } catch (error: any) {
@@ -38,15 +46,15 @@ const useFetch = <T>(
 
   useEffect(() => {
     fetchData();
-    if (intervalNum) {
+    if (options?.intervalNum) {
       const interval = setInterval(() => {
         fetchData();
-      }, intervalNum);
+      }, options.intervalNum);
       return () => {
         clearInterval(interval);
       };
     }
-  }, dependencies ?? []);
+  }, options?.dependencies ?? []);
 
   return { data, error, status, isLoading };
 };

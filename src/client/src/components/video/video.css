@@ -13,7 +13,8 @@
 
 .fake {
   background-color: #e2e2e2;
-  color: #e2e2e2;
+  color: #000;
+  color: rgba(0, 0, 0, 0);
 }
 
 @media only screen and (max-width: 850px) {

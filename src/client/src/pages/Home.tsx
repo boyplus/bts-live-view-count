@@ -17,7 +17,8 @@ import '../css/home.css';
 
 const Home: React.FC = () => {
   const [sortBy, setSortBy] = useState<SortVideoBy>(SortVideoBy.View)
-  const { data: videos = [], isLoading, error } = useFetch<Video[]>(() => videoApi.getVideos(sortBy), 300000, [sortBy]);
+  const { data: videos = [], isLoading, error } = useFetch<Video[]>(() => videoApi.getVideos(sortBy),
+    { intervalNum: 300000, dependencies: [sortBy], isDelay: true });
 
   return (
     <main className="home-container">
