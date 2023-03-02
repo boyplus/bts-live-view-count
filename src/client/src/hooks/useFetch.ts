@@ -9,6 +9,7 @@ export interface fetchOptions {
   intervalNum?: number;
   dependencies?: Array<any>;
   isDelay?: boolean;
+  delayDuration?: number;
 }
 
 const useFetch = <T>(
@@ -29,7 +30,7 @@ const useFetch = <T>(
     try {
       setIsLoading(true);
       const [_, res] = await Promise.all([
-        options?.isDelay ? delay(500) : null,
+        options?.isDelay ? delay(options.delayDuration ?? 500) : null,
         fetch(),
       ]);
 
