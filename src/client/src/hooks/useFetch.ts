@@ -12,19 +12,23 @@ export interface fetchOptions {
   delayDuration?: number;
 }
 
-const useFetch = <T>(
-  fetch: (options?: AxiosRequestConfig) => Promise<AxiosResponse<T, any>>,
-  options?: fetchOptions
-): {
+export interface FetchResult<T> {
   data: T | undefined;
   status: number | undefined;
   error: any;
   isLoading: boolean;
-} => {
+  isFirstTime: boolean;
+}
+
+const useFetch = <T>(
+  fetch: (options?: AxiosRequestConfig) => Promise<AxiosResponse<T, any>>,
+  options?: fetchOptions
+): FetchResult<T> => {
   const [data, setData] = useState<T>();
   const [error, setError] = useState<any>();
   const [status, setStatus] = useState<number>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isFirstTime, setIsFirstTime] = useState<boolean>(true);
 
   const fetchData = async () => {
     try {
@@ -35,6 +39,7 @@ const useFetch = <T>(
       ]);
 
       setData(res.data);
+      setIsFirstTime(false);
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
         setStatus(error.status);
@@ -57,7 +62,7 @@ const useFetch = <T>(
     }
   }, options?.dependencies ?? []);
 
-  return { data, error, status, isLoading };
+  return { data, error, status, isLoading, isFirstTime };
 };
 
 export default useFetch;

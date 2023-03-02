@@ -30,9 +30,8 @@ const Header: React.FC<HeaderProps> = ({ sortBy, setSortBy }) => {
         </span>
         <h4 className="text-menu">Sort by</h4>
         <SortBy sortBy={sortBy} setSortBy={setSortBy} />
-
-
       </div>
+
       <div id="header">
         <h1 className="text-header">BTS live view count</h1>
         <div className="menu" onClick={openNav}>

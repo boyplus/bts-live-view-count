@@ -17,13 +17,16 @@ import '../css/home.css';
 
 const Home: React.FC = () => {
   const [sortBy, setSortBy] = useState<SortVideoBy>(SortVideoBy.View)
-  const { data: videos = [], isLoading, error } = useFetch<Video[]>(() => videoApi.getVideos(sortBy),
-    { intervalNum: 300000, dependencies: [sortBy], isDelay: true });
+  const { data: videos = [], isLoading, isFirstTime, error } = useFetch<Video[]>
+    (
+      () => videoApi.getVideos(sortBy),
+      { intervalNum: 300000, dependencies: [sortBy], isDelay: true }
+    );
 
   return (
     <main className="home-container">
       <Header sortBy={sortBy} setSortBy={setSortBy}></Header>
-      <Videos videos={videos} isLoading={isLoading} />
+      <Videos videos={videos} isLoading={isFirstTime && isLoading} />
     </main>
   );
 }
