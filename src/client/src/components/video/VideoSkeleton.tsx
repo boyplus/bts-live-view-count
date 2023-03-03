@@ -11,9 +11,7 @@ const VideoSkeleton: React.FC = () => {
   return (
     <div className='video-card'>
 
-      <a>
-        <div className='skeleton-video-thumbnail' />
-      </a>
+      <div className='skeleton-video-thumbnail' />
 
       <div className='content-container'>
         <div className='title'>

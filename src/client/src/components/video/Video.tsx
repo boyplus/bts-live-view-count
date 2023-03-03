@@ -38,6 +38,7 @@ const Video: React.FC<VideoProps> = ({ id, title, currentView, currentLike, curr
           className='center-cropped'
           width="358px"
           height="260px"
+          alt={title}
         />
       </a>
 

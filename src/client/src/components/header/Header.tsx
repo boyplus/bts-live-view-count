@@ -39,6 +39,7 @@ const Header: React.FC<HeaderProps> = ({ sortBy, setSortBy }) => {
             src="https://cdn2.iconfinder.com/data/icons/4web-3/139/menu-512.png"
             alt="hamburger-icon"
             height="40px"
+            width="40px"
             className='hamburger'
           ></img>
         </div>
