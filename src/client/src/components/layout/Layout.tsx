@@ -20,20 +20,34 @@ type LayoutProps = {
 
 const Layout: React.FC<LayoutProps> = ({ isProtected, children }) => {
   // Check whether admin is logged in
-  const { data: profile, isLoading, error } = useFetch<Admin>(() => authApi.profile(), { isDelay: true, delayDuration: 2000 });
+  const { data: profile, isLoading, error, status } = useFetch<Admin>
+    (
+      () => authApi.profile(), { isDelay: true, delayDuration: 2000 }
+    );
 
   if (isProtected) {
     console.log(profile)
   }
 
   const renderContent = () => {
-    if (isProtected) {
-      return (
-        isLoading ? <div className='loader-container'><Loader isLoading={isLoading} /></div> : children
-      )
-    } else {
-      return children;
+    if (!isProtected) return children;
+
+    if (isLoading) {
+      return <div className='loader-container'><Loader isLoading={isLoading} /></div>
     }
+    if (error) {
+      if (status) {
+        switch (status) {
+          case 401: return <div>You are not authorized</div>
+          default: return <div>Something went wrong...</div>
+        }
+      }
+      else {
+
+      }
+      return <div>Error</div>
+    }
+    return children;
   }
 
   return (

@@ -39,7 +39,7 @@ const useFetch = <T>(
       setData(res.data);
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
-        setStatus(error.status);
+        setStatus(error.response?.status);
       }
       setError(error);
     } finally {
