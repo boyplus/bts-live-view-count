@@ -5,6 +5,9 @@ import { Routes, Route } from 'react-router-dom';
 import AdminPage from './pages/Admin';
 import Home from './pages/Home';
 
+// CSS
+import './App.css'
+
 const App: React.FC = () => {
   return (
     <>

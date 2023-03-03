@@ -8,10 +8,9 @@ import { Admin } from '@/api/generated';
 import useFetch from '@/hooks/useFetch';
 
 // Components
-import Loader from '../loader/SquareLoader';
-
-// CSS
-import './layout.css';
+import SquareLoader from '@/components/loader/SquareLoader';
+import UnauthorizedFullScreen from '@/components/error/UnauthorizedFullScreen';
+import SomethingWentWrongFullScreen from '@/components/error/SomethingWentWrongFullScreen';
 
 type LayoutProps = {
   isProtected: boolean;
@@ -32,22 +31,20 @@ const Layout: React.FC<LayoutProps> = ({ isProtected, children }) => {
   const renderContent = () => {
     if (!isProtected) return children;
 
-    if (isLoading) {
-      return <div className='loader-container'><Loader isLoading={isLoading} /></div>
-    }
-    if (error) {
-      if (status) {
-        switch (status) {
-          case 401: return <div>You are not authorized</div>
-          default: return <div>Something went wrong...</div>
-        }
-      }
-      else {
+    console.log('is loading is', isLoading)
 
-      }
-      return <div>Error</div>
+    if (isLoading) {
+      return <div className='center-full-screen-container'><SquareLoader isLoading={isLoading} /></div>
     }
-    return children;
+    if (!error) return children;
+
+    if (status) {
+      switch (status) {
+        case 401: return <UnauthorizedFullScreen />
+        default: return <SomethingWentWrongFullScreen />
+      }
+    }
+    return <SomethingWentWrongFullScreen />
   }
 
   return (

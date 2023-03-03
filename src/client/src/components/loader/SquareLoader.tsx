@@ -2,11 +2,11 @@ import React from 'react';
 
 import './loader.css';
 
-type LoaderProps = {
+export type LoaderProps = {
   isLoading: boolean;
 }
 
-const Loader: React.FC<LoaderProps> = ({ isLoading }) => {
+const SquareLoader: React.FC<LoaderProps> = ({ isLoading }) => {
   return (
     isLoading ? <div className="spinner-square" >
       <div className="square-1 square"></div>
@@ -16,4 +16,4 @@ const Loader: React.FC<LoaderProps> = ({ isLoading }) => {
   );
 }
 
-export default Loader;
+export default SquareLoader;
