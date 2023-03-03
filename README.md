@@ -4,6 +4,8 @@
 
 BTS live view count is a monolith web application for showing view, and statistics of BTS (Korean boy group) music video in real time.
 
+![home-page-screenshot](doc/images/home-page.png)
+
 ### Tech Stack
 
 - **Front-end**
