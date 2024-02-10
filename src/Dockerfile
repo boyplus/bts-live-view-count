@@ -4,17 +4,17 @@ EXPOSE 3000
 
 FROM node:20.11.0-alpine AS client-build
 WORKDIR /usr/src/app
-COPY ./client/package.json ./client/yarn.lock ./
-RUN yarn
+COPY ./client/package.json ./client/pnpm-lock.yaml ./
+RUN pnpm install
 COPY ./client .
-RUN yarn build
+RUN pnpm build
 
 FROM node:20.11.0-alpine AS server-build
 WORKDIR /usr/src/app
-COPY ./server/package.json ./server/yarn.lock ./
-RUN yarn
+COPY ./server/package.json ./server/pnpm-lock.yaml ./
+RUN pnpm install
 COPY ./server .
-RUN yarn build
+RUN pnpm build
 
 
 FROM base AS final
