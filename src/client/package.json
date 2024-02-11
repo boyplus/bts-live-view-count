@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
+    "dev": "bunx --bun vite",
+    "build": "bunx --bun vite build",
+    "preview": "bunx --bun vite preview",
     "gen-client": "openapi-generator-cli generate -i http://localhost:3000/api/docs-json -g typescript-axios -o src/api/generated --additional-properties=disallowAdditionalPropertiesIfNotPresent=false,supportsES6=true,typescriptThreePlus=true --enable-post-process-file --remove-operation-id-prefix"
   },
   "dependencies": {
