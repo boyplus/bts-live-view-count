@@ -1,4 +1,4 @@
-FROM node:20.11.0-slim AS base
+FROM oven/bun:1 AS base
 WORKDIR /usr/src/app
 EXPOSE 3000
 
@@ -9,19 +9,16 @@ RUN bun install --frozen-lockfile
 COPY ./client .
 RUN bun run build
 
-FROM node:20.11.0 AS server-build
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
+FROM oven/bun:1 AS server-build
 WORKDIR /usr/src/app
-COPY ./server/package.json ./server/pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+COPY ./server/package.json ./server/bun.lockb ./
+RUN bun install --frozen-lockfile
 COPY ./server .
-RUN pnpm build
+RUN bun run build
 
 
 FROM base AS final
 WORKDIR /usr/src/app
 COPY --from=server-build /usr/src/app .
 COPY --from=client-build /usr/src/server/wwwroot/ ./wwwroot
-ENTRYPOINT [ "node", "dist/main.js" ]
+ENTRYPOINT [ "bun", "dist/main.js" ]
