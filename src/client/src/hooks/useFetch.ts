@@ -52,7 +52,7 @@ const useFetch = <T>(
     if (options?.intervalNum) {
       const interval = setInterval(() => {
         fetchData();
-        setIsLoading(false);
+        setIsLoading(false)
       }, options.intervalNum);
       return () => {
         clearInterval(interval);
